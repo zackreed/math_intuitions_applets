@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Derivatives Explorer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/quiz.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
+            <h1>📊 Interactive Derivatives Explorer</h1>
+            <p style="font-size: 1.2em; margin-top: 10px;">Visualize and understand the relationship between functions and their derivatives</p>
+        </header>
+        
+        <div class="content">
+            <!-- Introduction Section -->
+            <div class="section">
+                <h2>🎯 Introduction</h2>
+                <p>Welcome to the Interactive Derivatives Explorer! This tool helps you visualize how derivatives work by showing you:</p>
+                <ul>
+                    <li><strong style="color: #4ecca3;">The function</strong> y = f(x) in turquoise</li>
+                    <li><strong style="color: #ffe66d;">Small changes dx</strong> in yellow</li>
+                    <li><strong style="color: #ff9d76;">The rate of change dy/dx</strong> in orange</li>
+                    <li>How the derivative relates to the <strong>slope of the tangent line</strong></li>
+                </ul>
+                
+                <div class="key-concepts">
+                    <h4>Key Concept: What is dy/dx?</h4>
+                    <p>The derivative <strong>dy/dx</strong> tells us how much <em>y</em> changes when <em>x</em> changes by a tiny amount. The relationship is:</p>
+                    <p style="text-align: center; font-size: 1.3em; margin: 15px 0;"><strong>dy = (dy/dx) · dx</strong></p>
+                    <p>This means: the change in y equals the derivative times the change in x!</p>
+                </div>
+            </div>
+            
+            <!-- Interactive Applet -->
+            <div class="section">
+                <h2>🔬 Interactive Applet</h2>
+                <p>Use the applet below to explore different functions. Drag the red point to see how the derivative changes at different locations!</p>
+                
+                <div class="applet-container">
+                    <iframe src="../applets/differential-viz-dynamic.html" width="100%" height="700" style="border: none; border-radius: 8px;"></iframe>
+                </div>
+                
+                <div class="hint">
+                    <strong>💡 Tip:</strong> Try entering different functions like <code>x^3</code>, <code>sin(x)</code>, <code>exp(x)</code>, or <code>sqrt(x)</code> and observe how the derivative changes!
+                </div>
+            </div>
+            
+            <!-- Guided Explorations -->
+            <div class="section">
+                <h2>🧪 Guided Explorations</h2>
+                
+                <div class="exploration">
+                    <h4>Exploration 1: Linear Functions</h4>
+                    <p><strong>Try this:</strong> Enter the function <code>2*x + 1</code> with domain from 0 to 5.</p>
+                    <p><strong>Question:</strong> What do you notice about dy/dx as you move the point? Why does this make sense for a linear function?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="exploration">
+                    <h4>Exploration 2: Quadratic Functions</h4>
+                    <p><strong>Try this:</strong> Enter <code>x^2</code> with domain from -3 to 3.</p>
+                    <p><strong>Observe:</strong> Move the point from left to right. What happens to the derivative at x = 0? What pattern do you see?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="exploration">
+                    <h4>Exploration 3: The Mysterious e^x</h4>
+                    <p><strong>Try this:</strong> Enter <code>exp(x)</code> with domain from -2 to 3.</p>
+                    <p><strong>Challenge:</strong> Compare the value of the function f(x) to the value of its derivative dy/dx at several points. What pattern do you notice? What makes e^x special?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+            </div>
+            
+            <!-- Practice Questions -->
+            <div class="section">
+                <h2>📝 Practice Questions</h2>
+                
+                <div class="question">
+                    <h4>Question 1: Computing with dx and dy</h4>
+                    <p>Set the function to <code>x^2</code> and move the point to x = 3.</p>
+                    <p><strong>(a)</strong> What is the value of dy/dx at x = 3?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                    <p><strong>(b)</strong> If dx = 0.1 (as shown in the zoomed view), what is dy? Use the relationship dy = (dy/dx) · dx to calculate it.</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                    <p><strong>(c)</strong> Count the orange "dx" vectors in the zoomed view. How does this relate to your answer in part (a)?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="question">
+                    <h4>Question 2: Understanding the Tangent Line</h4>
+                    <p>Set the function to <code>x^3 - 3*x</code> with domain from -2 to 2.</p>
+                    <p><strong>(a)</strong> Find a point where the tangent line is horizontal (dy/dx = 0). What is the x-value?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                    <p><strong>(b)</strong> At x = 2, is the function increasing or decreasing? How does the sign of dy/dx tell you this?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="question">
+                    <h4>Question 3: Rate of Change</h4>
+                    <p>Set the function to <code>sqrt(x)</code> with domain from 0.1 to 9.</p>
+                    <p><strong>(a)</strong> What happens to dy/dx as x increases? Does the function change faster or slower as x gets larger?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                    <p><strong>(b)</strong> At x = 4, estimate dy/dx from the applet. Then calculate: if x changes by 0.2, approximately how much does y change?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="question">
+                    <h4>Question 4: The Special Property of e^x</h4>
+                    <p>Set the function to <code>exp(x)</code> with domain from -1 to 3.</p>
+                    <p><strong>(a)</strong> Fill in this table by dragging the point to different x-values:</p>
+                    <table style="margin: 15px auto; border-collapse: collapse; text-align: center; width: 100%; color: #e8e8e8;">
+                        <tr style="background: #1e3a5f; color: white;">
+                            <th style="padding: 10px; border: 1px solid #4a5568;">x</th>
+                            <th style="padding: 10px; border: 1px solid #4a5568;">f(x) = e^x</th>
+                            <th style="padding: 10px; border: 1px solid #4a5568;">dy/dx</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #4a5568;">0</td>
+                            <td style="padding: 10px; border: 1px solid #4a5568;" contenteditable="true"></td>
+                            <td style="padding: 10px; border: 1px solid #4a5568;" contenteditable="true"></td>
+                        </tr>
+                        <tr style="background: #0f1925;">
+                            <td style="padding: 10px; border: 1px solid #4a5568;">1</td>
+                            <td style="padding: 10px; border: 1px solid #4a5568;" contenteditable="true"></td>
+                            <td style="padding: 10px; border: 1px solid #4a5568;" contenteditable="true"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #4a5568;">2</td>
+                            <td style="padding: 10px; border: 1px solid #4a5568;" contenteditable="true"></td>
+                            <td style="padding: 10px; border: 1px solid #4a5568;" contenteditable="true"></td>
+                        </tr>
+                    </table>
+                    <p><strong>(b)</strong> Based on your observations, complete this statement: "The derivative of e^x is ________"</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                    <p><strong>(c)</strong> Why is this property remarkable? What makes e^x different from other exponential functions like 2^x or 10^x?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+            </div>
+            
+            <!-- Symbolic Computation Section -->
+            <div class="section">
+                <h2>🖥️ Symbolic Derivative Calculator</h2>
+                <p>Use Python with SymPy to verify your answers and explore derivatives symbolically!</p>
+                
+                <div class="sage-container">
+                    <h4>Calculate and Evaluate Derivatives</h4>
+                    <p>Run the code below to calculate derivatives symbolically. Modify it to explore different functions!</p>
+                    
+                    <div class="sagecell-python" id="sagecell1">from sympy import *
+
+# Define the variable
+x = Symbol('x')
+
+# Define your function
+f = x**2
+
+# Calculate the derivative
+f_prime = diff(f, x)
+
+print(f"Function: f(x) = {f}")
+print(f"Derivative: f'(x) = {f_prime}")
+
+# Evaluate at a specific point
+x_value = 3
+result = f_prime.subs(x, x_value)
+print(f"\nAt x = {x_value}:")
+print(f"f'({x_value}) = {result}")</div>
+                </div>
+                
+                <div class="sage-container">
+                    <h4>Template for Your Own Explorations</h4>
+                    <p>Use this template to explore any function you want!</p>
+                    
+                    <div class="sagecell-python" id="sagecell2">from sympy import *
+
+# Define variable
+x = Symbol('x')
+
+# YOUR FUNCTION HERE - try: exp(x), sin(x), sqrt(x), etc.
+f = # Enter your function
+
+# Calculate derivative
+f_prime = diff(f, x)
+
+# Simplify if needed
+f_prime_simplified = simplify(f_prime)
+
+print(f"Function: {f}")
+print(f"Derivative: {f_prime_simplified}")
+
+# Evaluate at multiple points
+test_points = [0, 1, 2, 3]
+print("\nEvaluation table:")
+print("x\t|\tf(x)\t|\tf'(x)")
+print("-" * 40)
+for x_val in test_points:
+    f_val = f.subs(x, x_val)
+    fp_val = f_prime_simplified.subs(x, x_val)
+    print(f"{x_val}\t|\t{f_val}\t|\t{fp_val}")</div>
+                </div>
+                
+                <div class="hint">
+                    <strong>💡 SymPy Tips:</strong>
+                    <ul>
+                        <li>Use <code>exp(x)</code> for e^x</li>
+                        <li>Use <code>sqrt(x)</code> for square root</li>
+                        <li>Use <code>sin(x)</code>, <code>cos(x)</code>, <code>tan(x)</code> for trig functions</li>
+                        <li>Use <code>log(x)</code> for natural logarithm</li>
+                        <li>Use <code>**</code> for exponents: <code>x**3</code> means x³</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Challenge Section -->
+            <div class="section">
+                <h2>🏆 Challenge Problems</h2>
+                
+                <div class="question">
+                    <h4>Challenge 1: Product Patterns</h4>
+                    <p>Explore <code>x*exp(x)</code> from 0 to 3. At x = 1, what is dy/dx? Can you explain this value using the product rule: (uv)' = u'v + uv'?</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="question">
+                    <h4>Challenge 2: Chain Rule Discovery</h4>
+                    <p>Compare the derivatives of <code>x^2</code> and <code>sin(x^2)</code> at x = 1.5. How are they related? This is your first glimpse of the chain rule!</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+                
+                <div class="question">
+                    <h4>Challenge 3: Design a Function</h4>
+                    <p>Can you design a function that has dy/dx = 10 at x = 2? Use the applet and SymPy to verify your answer!</p>
+                    <div class="answer-space" contenteditable="true"></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Interactive Derivatives Explorer | Built with Claude and Sage | For educational purposes</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Drag the red point • Enter functions • Explore derivatives • Learn calculus visually</p>
+        </footer>
+    </div>
+    
+    <script>
+        sagecell.makeSagecell({
+            inputLocation: '.sagecell-python',
+            languages: ['python'],
+            evalButtonText: 'Run Code',
+            hide: ['editor', 'language']
+        });
+    </script>
+</body>
+</html>

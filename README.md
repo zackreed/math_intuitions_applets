@@ -16,6 +16,10 @@ A collection of interactive applets for learning mathematical concepts.
 - **Walkthrough**: [SVD Walkthrough](pages/svd-walkthrough.html)
 - **Applet**: [Vector Projection Applet](applets/vector-projection-applet.html)
 
+### Interactive Derivatives Explorer
+- **Walkthrough**: [Derivatives Explorer](pages/differential-walkthrough.html)
+- **Applet**: [Differential Visualization](applets/differential-viz-dynamic.html)
+
 ## Contributing
 
 To add a new applet:
