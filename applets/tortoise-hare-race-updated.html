@@ -195,7 +195,6 @@
         // State
         let time = 0;
         let racing = false;
-        let pointsLocked = false;
         let dt = 0.05; // Internal dt (0-1 scale)
         const finishLine = 0.75;
         
@@ -607,16 +606,14 @@
             
             const error = 0.01;
             let winner = 'Design your strategy!';
-            if (pointsLocked) {
-                if (tortoiseFinishTime === null) {
-                    winner = '🐰 Hare Wins!';
-                } else if (Math.abs(tortoiseFinishTime - hareFinishTime) < error) {
-                    winner = "It's a tie! 🏁";
-                } else if (tortoiseFinishTime < hareFinishTime) {
-                    winner = '🐢 Tortoise Wins!';
-                } else {
-                    winner = '🐰 Hare Wins!';
-                }
+            if (tortoiseFinishTime === null) {
+                winner = '🐰 Hare Wins!';
+            } else if (Math.abs(tortoiseFinishTime - hareFinishTime) < error) {
+                winner = "It's a tie! 🏁";
+            } else if (tortoiseFinishTime < hareFinishTime) {
+                winner = '🐢 Tortoise Wins!';
+            } else {
+                winner = '🐰 Hare Wins!';
             }
             
             // Store winner for track display (hidden div used for data transfer)
@@ -684,17 +681,13 @@
         });
         
         document.getElementById('action-btn').addEventListener('click', () => {
-            if (racing) {
-                // Restart
-                time = 0;
-                document.getElementById('time-slider').value = 0;
-            } else {
-                // Start
-                time = 0;
-                racing = true;
-                document.getElementById('action-btn').textContent = 'Restart Race';
-                document.getElementById('time-slider').value = 0;
-            }
+            // Always restart from 0
+            time = 0;
+            racing = true;
+            document.getElementById('time-slider').value = 0;
+            updateDisplays();
+            drawTrack();
+            drawGraph();
         });
         
         document.getElementById('dt-input').addEventListener('input', (e) => {
