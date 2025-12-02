@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tortoise vs Hare - Average Rates of Change</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/quiz.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
+            <h1>🐢 Tortoise vs Hare: Rates of Change</h1>
+            <p style="font-size: 1.2em; margin-top: 10px;">Explore the difference between average speed and instantaneous speed through a race!</p>
+        </header>
+        
+        <div class="content">
+            <!-- Introduction Section -->
+            <div class="section">
+                <h2>🎯 Introduction</h2>
+                <p>In this interactive race, you control the Tortoise's strategy against the Hare. The Hare runs at a constant steady pace. Your goal is to understand how <strong>average rate of change</strong> (average speed) relates to the outcome of the race.</p>
+                
+                <div class="key-concepts">
+                    <h4>Key Concept: Average Rate of Change</h4>
+                    <p>The average rate of change over a time interval \(\Delta t\) is given by the slope of the secant line connecting two points on the distance-time graph:</p>
+                    <p style="text-align: center; font-size: 1.3em; margin: 15px 0;">
+                        \(\text{Average Rate} = \frac{\Delta \text{Distance}}{\Delta \text{Time}} = \frac{D(t + \Delta t) - D(t)}{\Delta t}\)
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Interactive Applet -->
+            <div class="section">
+                <h2>🏁 The Race</h2>
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>Drag the points on the graph to design the Tortoise's strategy.</li>
+                    <li>Click "Lock Points & Race!" to watch them run.</li>
+                    <li>Use the "Average Rates" panel to see how speed is calculated over different time intervals (\(\Delta t\)).</li>
+                </ol>
+                
+                <div class="applet-container">
+                    <iframe src="../applets/tortoise-hare-race-updated.html" width="100%" height="650" style="border: none; border-radius: 8px;"></iframe>
+                </div>
+            </div>
+            
+            <!-- Guided Explorations -->
+            <div class="section">
+                <h2>🧪 Guided Explorations</h2>
+                
+                <div class="exploration" id="exp1">
+                    <h4>Exploration 1: Winning Strategies</h4>
+                    <p><strong>Try this:</strong> Use the "Fast Start" preset for the Tortoise. Run the race.</p>
+                    <p><strong>Question:</strong> Even though the Tortoise starts faster, why might it lose or barely win? Look at the slope of the graph near the end.</p>
+                    <div class="options">
+                        <div class="option" onclick="selectRadio(this, 'exp1', 'a')">
+                            <input type="radio" name="exp1" value="a"> The Tortoise runs out of energy (slope becomes flatter/zero).
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'exp1', 'b')">
+                            <input type="radio" name="exp1" value="b"> The Hare speeds up at the end.
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'exp1', 'c')">
+                            <input type="radio" name="exp1" value="c"> The track gets longer.
+                        </div>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('exp1', 'a')">Check Answer</button>
+                    <div class="feedback" id="exp1-feedback"></div>
+                </div>
+                
+                <div class="exploration" id="exp2">
+                    <h4>Exploration 2: The Hare's Constant Pace</h4>
+                    <p><strong>Observe:</strong> The Hare's graph is a straight line.</p>
+                    <p><strong>Question:</strong> If you calculate the average rate of change for the Hare over <em>any</em> time interval \(\Delta t\), what will you find?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectRadio(this, 'exp2', 'a')">
+                            <input type="radio" name="exp2" value="a"> It changes depending on where you are on the track.
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'exp2', 'b')">
+                            <input type="radio" name="exp2" value="b"> It is always the same constant value.
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'exp2', 'c')">
+                            <input type="radio" name="exp2" value="c"> It is zero.
+                        </div>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('exp2', 'b')">Check Answer</button>
+                    <div class="feedback" id="exp2-feedback"></div>
+                </div>
+                
+                <div class="exploration" id="exp3">
+                    <h4>Exploration 3: Secant Lines</h4>
+                    <p><strong>Try this:</strong> Increase \(\Delta t\) in the applet controls to 2.0s or more.</p>
+                    <p><strong>Question:</strong> The dashed lines in the graph represent the "secant line". What does the slope of this line represent?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectRadio(this, 'exp3', 'a')">
+                            <input type="radio" name="exp3" value="a"> The instantaneous speed at the start point.
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'exp3', 'b')">
+                            <input type="radio" name="exp3" value="b"> The average speed over that specific time interval.
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'exp3', 'c')">
+                            <input type="radio" name="exp3" value="c"> The total distance traveled.
+                        </div>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('exp3', 'b')">Check Answer</button>
+                    <div class="feedback" id="exp3-feedback"></div>
+                </div>
+            </div>
+            
+            <!-- Practice Questions -->
+            <div class="section">
+                <h2>📝 Practice Questions</h2>
+                
+                <div class="question" id="q1">
+                    <h4>Question 1: Calculating Average Speed</h4>
+                    <p>Suppose the Tortoise travels 40 meters in the first 4 seconds.</p>
+                    <p><strong>(a)</strong> What is the average speed over this interval?</p>
+                    <div class="number-input">
+                        <label>Average Speed (m/s) =</label>
+                        <input type="number" id="q1a-input" step="0.1" placeholder="Enter value">
+                    </div>
+                    <button class="check-btn" onclick="checkNumericAnswer('q1a', 10, 0.1)">Check Answer</button>
+                    <div class="feedback" id="q1a-feedback"></div>
+                </div>
+                
+                <div class="question" id="q2">
+                    <h4>Question 2: Instantaneous vs Average</h4>
+                    <p>If the Tortoise stops completely for a nap between t=4s and t=6s:</p>
+                    <p><strong>(a)</strong> What is its instantaneous speed at t=5s?</p>
+                    <div class="number-input">
+                        <label>Speed (m/s) =</label>
+                        <input type="number" id="q2a-input" step="0.1" placeholder="Enter value">
+                    </div>
+                    <button class="check-btn" onclick="checkNumericAnswer('q2a', 0, 0.1)">Check Answer</button>
+                    <div class="feedback" id="q2a-feedback"></div>
+                    
+                    <p style="margin-top: 20px;"><strong>(b)</strong> However, if we calculate the average speed from t=0 to t=10, will it be zero?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectRadio(this, 'q2b', 'a')">
+                            <input type="radio" name="q2b" value="a"> Yes, because it stopped.
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'q2b', 'b')">
+                            <input type="radio" name="q2b" value="b"> No, because the total distance traveled is not zero.
+                        </div>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('q2b', 'b')">Check Answer</button>
+                    <div class="feedback" id="q2b-feedback"></div>
+                </div>
+            </div>
+            
+            <!-- Symbolic Computation Section -->
+            <div class="section">
+                <h2>🖥️ Symbolic Computation</h2>
+                <p>Use Python to calculate average rates of change for different functions.</p>
+                
+                <div class="sage-container">
+                    <h4>Average Rate of Change Calculator</h4>
+                    <p>The code below defines a function \(D(t)\) (distance) and calculates the average rate of change \(\frac{D(t_2) - D(t_1)}{t_2 - t_1}\).</p>
+                    
+                    <div class="sagecell-python" id="sagecell1">from sympy import *
+
+t = Symbol('t')
+
+# Define the distance function (e.g., t^2 for accelerating)
+D = t**2
+
+# Define the time interval [t1, t2]
+t1 = 0
+t2 = 2
+
+# Calculate positions
+pos1 = D.subs(t, t1)
+pos2 = D.subs(t, t2)
+
+# Calculate Average Rate of Change
+avg_rate = (pos2 - pos1) / (t2 - t1)
+
+print(f"Function: D(t) = {D}")
+print(f"Interval: [{t1}, {t2}]")
+print(f"Position at t={t1}: {pos1}")
+print(f"Position at t={t2}: {pos2}")
+print(f"Average Rate of Change: {avg_rate}")</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Tortoise vs Hare Walkthrough | Built with Claude and Sage | For educational purposes</p>
+        </footer>
+    </div>
+    
+    <script>
+        sagecell.makeSagecell({
+            inputLocation: '.sagecell-python',
+            languages: ['python'],
+            evalButtonText: 'Run Code'
+        });
+    </script>
+</body>
+</html>
