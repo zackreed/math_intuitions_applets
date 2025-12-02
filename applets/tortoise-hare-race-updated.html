@@ -281,23 +281,30 @@
             ];
         }
         
-        // Find nearest control point
-        function findNearestControlPoint(mouseX, mouseY) {
-            const threshold = 15;
-            for (let i = 0; i < tortoiseControlPoints.length; i++) {
-                const [cx, cy] = toGraphCanvas(
-                    tortoiseControlPoints[i][0],
-                    tortoiseControlPoints[i][1]
-                );
-                const dist = Math.sqrt((mouseX - cx) ** 2 + (mouseY - cy) ** 2);
-                if (dist < threshold) {
-                    return i;
+        // Mouse events for graph
+        graphCanvas.addEventListener('mousedown',e=>{
+            const r=graphCanvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+            for(let i=0;i<tortoiseControlPoints.length;i++){
+                const [cx,cy]=toGraphCanvas(tortoiseControlPoints[i][0],tortoiseControlPoints[i][1]);
+                if(Math.sqrt((mx-cx)**2+(my-cy)**2)<15)draggingPoint=i;
+            }
+        });
+
+        graphCanvas.addEventListener('mousemove',e=>{
+            if(draggingPoint!==null){
+                const r=graphCanvas.getBoundingClientRect();
+                const [nt,np]=fromGraphCanvas(e.clientX-r.left,e.clientY-r.top);
+                if(draggingPoint!==0 && draggingPoint!==tortoiseControlPoints.length-1){
+                    tortoiseControlPoints[draggingPoint][1] = Math.max(0,Math.min(1,np));
+                    updateDisplays();
+                    drawGraph();
+                    drawTrack();
                 }
             }
-            return null;
-        }
-        
-        // Draw track
+        });
+
+        graphCanvas.addEventListener('mouseup',()=>draggingPoint=null);
+        graphCanvas.addEventListener('mouseleave',()=>draggingPoint=null);        // Draw track
         function drawTrack() {
             trackCtx.clearRect(0, 0, trackCanvas.width, trackCanvas.height);
             
@@ -641,66 +648,7 @@
             requestAnimationFrame(animate);
         }
         
-        // Mouse events for graph
-        function getMousePos(evt) {
-            const rect = graphCanvas.getBoundingClientRect();
-            const style = window.getComputedStyle(graphCanvas);
-            const borderLeft = parseFloat(style.borderLeftWidth) || 0;
-            const borderTop = parseFloat(style.borderTopWidth) || 0;
-            
-            // Account for any scrolling in the iframe
-            const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
-            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            
-            return {
-                x: evt.clientX - rect.left - borderLeft + scrollX,
-                y: evt.clientY - rect.top - borderTop + scrollY
-            };
-        }
 
-        graphCanvas.addEventListener('mousedown', (e) => {
-            if (!pointsLocked) {
-                const pos = getMousePos(e);
-                draggingPoint = findNearestControlPoint(pos.x, pos.y);
-            }
-        });
-        
-        graphCanvas.addEventListener('mousemove', (e) => {
-            const pos = getMousePos(e);
-            const mouseX = pos.x;
-            const mouseY = pos.y;
-            
-            if (draggingPoint !== null && !pointsLocked) {
-                if (draggingPoint !== 0 && draggingPoint !== tortoiseControlPoints.length - 1) {
-                    const [newT, newProgress] = fromGraphCanvas(mouseX, mouseY);
-                    const clampedT = Math.max(0, Math.min(1, newT));
-                    const clampedProgress = Math.max(0, Math.min(1, newProgress));
-                    tortoiseControlPoints[draggingPoint] = [clampedT, clampedProgress];
-                    tortoiseControlPoints.sort((a, b) => a[0] - b[0]);
-                    updateDisplays();
-                    drawGraph();
-                    drawTrack();
-                }
-            } else if (!pointsLocked) {
-                const newHover = findNearestControlPoint(mouseX, mouseY);
-                if (newHover !== hoveredPoint) {
-                    hoveredPoint = newHover;
-                    drawGraph();
-                }
-            }
-        });
-        
-        graphCanvas.addEventListener('mouseup', () => {
-            draggingPoint = null;
-        });
-        
-        graphCanvas.addEventListener('mouseleave', () => {
-            draggingPoint = null;
-            hoveredPoint = null;
-            if (!pointsLocked) {
-                drawGraph();
-            }
-        });
         
         // Event listeners
         document.getElementById('time-slider').addEventListener('input', (e) => {
