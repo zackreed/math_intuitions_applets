@@ -640,9 +640,13 @@
         // Mouse events for graph
         function getMousePos(evt) {
             const rect = graphCanvas.getBoundingClientRect();
+            // Account for CSS scaling/zoom
+            const scaleX = graphCanvas.width / rect.width;
+            const scaleY = graphCanvas.height / rect.height;
+            
             return {
-                x: evt.clientX - rect.left,
-                y: evt.clientY - rect.top
+                x: (evt.clientX - rect.left) * scaleX,
+                y: (evt.clientY - rect.top) * scaleY
             };
         }
 
