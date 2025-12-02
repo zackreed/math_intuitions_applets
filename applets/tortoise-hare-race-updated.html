@@ -636,19 +636,27 @@
         }
         
         // Mouse events for graph
+        function getMousePos(evt) {
+            const rect = graphCanvas.getBoundingClientRect();
+            const scaleX = graphCanvas.width / rect.width;
+            const scaleY = graphCanvas.height / rect.height;
+            return {
+                x: (evt.clientX - rect.left) * scaleX,
+                y: (evt.clientY - rect.top) * scaleY
+            };
+        }
+
         graphCanvas.addEventListener('mousedown', (e) => {
             if (!pointsLocked) {
-                const rect = graphCanvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-                draggingPoint = findNearestControlPoint(mouseX, mouseY);
+                const pos = getMousePos(e);
+                draggingPoint = findNearestControlPoint(pos.x, pos.y);
             }
         });
         
         graphCanvas.addEventListener('mousemove', (e) => {
-            const rect = graphCanvas.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
+            const pos = getMousePos(e);
+            const mouseX = pos.x;
+            const mouseY = pos.y;
             
             if (draggingPoint !== null && !pointsLocked) {
                 if (draggingPoint !== 0 && draggingPoint !== tortoiseControlPoints.length - 1) {
