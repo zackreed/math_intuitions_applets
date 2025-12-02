@@ -21,6 +21,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-width: 704px; /* Prevent shrinking below canvas width + borders */
         }
         
         canvas {
@@ -29,6 +30,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: block;
             cursor: crosshair;
+            flex-shrink: 0;
         }
         
         canvas:hover {
@@ -638,11 +640,9 @@
         // Mouse events for graph
         function getMousePos(evt) {
             const rect = graphCanvas.getBoundingClientRect();
-            const scaleX = graphCanvas.width / rect.width;
-            const scaleY = graphCanvas.height / rect.height;
             return {
-                x: (evt.clientX - rect.left) * scaleX,
-                y: (evt.clientY - rect.top) * scaleY
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top
             };
         }
 
