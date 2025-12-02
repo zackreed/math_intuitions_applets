@@ -156,7 +156,7 @@
         <div class="control-group">
             <label>Time: <span class="value-display" id="time-display">0.00</span>s</label>
             <input type="range" id="time-slider" min="0" max="1" step="0.01" value="0">
-            <button id="action-btn">Lock Points & Race!</button>
+            <button id="action-btn">Race!</button>
         </div>
         
         <div class="control-group">
@@ -631,14 +631,14 @@
             document.getElementById('winner-display').textContent = winner;
         }
         
-        // Animation loop
+                // Animation loop
         function animate() {
             if (racing) {
                 time += 0.005;
                 if (time >= 1) {
                     time = 1;
                     racing = false;
-                    document.getElementById('action-btn').textContent = 'Unlock Points';
+                    document.getElementById('action-btn').textContent = 'Race!';
                 }
                 document.getElementById('time-slider').value = time;
                 updateDisplays();
@@ -647,6 +647,109 @@
             }
             requestAnimationFrame(animate);
         }
+        
+        // Mouse events for graph
+        graphCanvas.addEventListener('mousedown',e=>{
+            const r=graphCanvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+            for(let i=0;i<tortoiseControlPoints.length;i++){
+                const [cx,cy]=toGraphCanvas(tortoiseControlPoints[i][0],tortoiseControlPoints[i][1]);
+                if(Math.sqrt((mx-cx)**2+(my-cy)**2)<15)draggingPoint=i;
+            }
+        });
+
+        graphCanvas.addEventListener('mousemove',e=>{
+            if(draggingPoint!==null){
+                const r=graphCanvas.getBoundingClientRect();
+                const [nt,np]=fromGraphCanvas(e.clientX-r.left,e.clientY-r.top);
+                if(draggingPoint!==0 && draggingPoint!==tortoiseControlPoints.length-1){
+                    tortoiseControlPoints[draggingPoint][1] = Math.max(0,Math.min(1,np));
+                    updateDisplays();
+                    drawGraph();
+                    drawTrack();
+                }
+            }
+        });
+
+        graphCanvas.addEventListener('mouseup',()=>draggingPoint=null);
+        graphCanvas.addEventListener('mouseleave',()=>draggingPoint=null);
+        
+        // Event listeners
+        document.getElementById('time-slider').addEventListener('input', (e) => {
+            if (!racing) {
+                time = parseFloat(e.target.value);
+                updateDisplays();
+                drawTrack();
+                drawGraph();
+            }
+        });
+        
+        document.getElementById('action-btn').addEventListener('click', () => {
+            if (racing) {
+                // Restart
+                time = 0;
+                document.getElementById('time-slider').value = 0;
+            } else {
+                // Start
+                time = 0;
+                racing = true;
+                document.getElementById('action-btn').textContent = 'Restart Race';
+                document.getElementById('time-slider').value = 0;
+            }
+        });
+        
+        document.getElementById('dt-input').addEventListener('input', (e) => {
+            const displayValue = parseFloat(e.target.value);
+            if (displayValue > 0 && displayValue <= 5) {
+                // Convert display value (0-10s scale) to internal value (0-1 scale)
+                dt = displayValue / 10;
+                updateDisplays();
+                drawGraph();
+                drawTrack();
+            }
+        });
+        
+        // Preset buttons
+        document.getElementById('preset-slow').addEventListener('click', () => {
+            tortoiseControlPoints = [
+                [0, 0], [0.1, 0.05], [0.2, 0.12], [0.3, 0.22], [0.4, 0.35],
+                [0.5, 0.5], [0.6, 0.65], [0.7, 0.78], [0.8, 0.88], [0.9, 0.94], [1, 1]
+            ];
+            updateDisplays();
+            drawGraph();
+            drawTrack();
+        });
+        
+        document.getElementById('preset-fast').addEventListener('click', () => {
+            tortoiseControlPoints = [
+                [0, 0], [0.1, 0.25], [0.2, 0.45], [0.3, 0.6], [0.4, 0.7],
+                [0.5, 0.78], [0.6, 0.84], [0.7, 0.88], [0.8, 0.92], [0.9, 0.96], [1, 1]
+            ];
+            updateDisplays();
+            drawGraph();
+            drawTrack();
+        });
+        
+        document.getElementById('preset-steady').addEventListener('click', () => {
+            tortoiseControlPoints = [
+                [0, 0], [0.1, 0.1], [0.2, 0.2], [0.3, 0.3], [0.4, 0.4],
+                [0.5, 0.5], [0.6, 0.6], [0.7, 0.7], [0.8, 0.8], [0.9, 0.9], [1, 1]
+            ];
+            updateDisplays();
+            drawGraph();
+            drawTrack();
+        });
+        
+        document.getElementById('preset-random').addEventListener('click', () => {
+            tortoiseControlPoints = [[0, 0]];
+            for (let i = 1; i < 10; i++) {
+                tortoiseControlPoints.push([i * 0.1, Math.random()]);
+            }
+            tortoiseControlPoints.push([1, 1]);
+            tortoiseControlPoints.sort((a, b) => a[0] - b[0]);
+            updateDisplays();
+            drawGraph();
+            drawTrack();
+        });
         
 
         
