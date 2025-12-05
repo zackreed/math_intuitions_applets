@@ -28,18 +28,8 @@
                 
                 <div class="key-concepts">
                     <h4>Key Concept: Density and Integration</h4>
-                    <p>A <strong>density function</strong> \(\rho(x)\) gives the amount "per unit" at location \(x\). To find the total amount in a region \([a, b]\), we integrate:</p>
-                    <p style="text-align: center; font-size: 1.3em; margin: 15px 0;">
-                        \(\text{Total} = \int_a^b \rho(x) \, dx\)
-                    </p>
-                    <p>For a circular city with radial density \(\rho(D)\) (where \(D\) is distance from center), the population in a ring at distance \(D\) with width \(\Delta D\) is approximately:</p>
-                    <p style="text-align: center; font-size: 1.3em; margin: 15px 0;">
-                        \(\Delta P \approx \rho(D) \cdot 2\pi D \cdot \Delta D\)
-                    </p>
-                    <p>The total population from center to radius \(R\) is the integral:</p>
-                    <p style="text-align: center; font-size: 1.4em; margin: 15px 0;">
-                        \(P = \int_0^R 2\pi D \cdot \rho(D) \, dD\)
-                    </p>
+                    <p>A <strong>density function</strong> \(\rho(x)\) gives the amount "per unit" at location \(x\). When density varies across space, we need integration to accumulate the total quantity.</p>
+                    <p style="margin-top: 15px;"><strong>Your Goal:</strong> Through the explorations below, you'll discover how to calculate total population from a density function in a circular city. Pay attention to how ring area changes with distance!</p>
                 </div>
             </div>
             
@@ -85,18 +75,18 @@
                 </div>
                 
                 <div class="exploration" id="exp2">
-                    <h4>Exploration 2: Ring Area Effect</h4>
-                    <p><strong>Observe:</strong> Even though density decreases with distance, the <em>circumference</em> \(2\pi D\) of each ring increases with distance.</p>
-                    <p><strong>Question:</strong> For a ring at large \(D\), which factor dominates: decreasing density or increasing circumference?</p>
+                    <h4>Exploration 2: Ring Area and Circumference</h4>
+                    <p><strong>Observe:</strong> In "Local Ring" mode, watch the population value as you move the distance slider. Notice that the applet shows the circumference of each ring.</p>
+                    <p><strong>Question:</strong> A ring at distance \(D\) with small width \(\Delta D\) is approximately a rectangle when "unrolled". What would be its approximate area?</p>
                     <div class="options">
                         <div class="option" onclick="selectRadio(this, 'exp2', 'a')">
-                            <input type="radio" name="exp2" value="a"> It depends — density decreases faster than circumference grows for this model.
+                            <input type="radio" name="exp2" value="a"> Circumference × Width = \(2\pi D \cdot \Delta D\)
                         </div>
                         <div class="option" onclick="selectRadio(this, 'exp2', 'b')">
-                            <input type="radio" name="exp2" value="b"> Circumference always dominates, so rings far out have the most population.
+                            <input type="radio" name="exp2" value="b"> \(\pi D^2\)
                         </div>
                         <div class="option" onclick="selectRadio(this, 'exp2', 'c')">
-                            <input type="radio" name="exp2" value="c"> They exactly cancel out.
+                            <input type="radio" name="exp2" value="c"> \(D \cdot \Delta D\)
                         </div>
                     </div>
                     <button class="check-btn" onclick="checkAnswer('exp2', 'a')">Check Answer</button>
@@ -128,19 +118,20 @@
                 <h2>📝 Practice Questions</h2>
                 
                 <div class="question" id="q1">
-                    <h4>Question 1: Riemann Sum Interpretation</h4>
+                    <h4>Question 1: Building the Ring Population Formula</h4>
                     <p>Consider a ring at distance \(D = 5\) with width \(\Delta D = 1\). The density is \(\rho(5) = 2\) people per square unit.</p>
-                    <p><strong>(a)</strong> What is the circumference of the ring at \(D = 5\)?</p>
-                    <p class="hint">Hint: Circumference = \(2\pi D\)</p>
+                    <p><strong>(a)</strong> What is the approximate area of this thin ring?</p>
+                    <p class="hint">Hint: Think of the ring as an "unrolled rectangle" with length = circumference</p>
                     <div class="number-input">
-                        <label>Circumference ≈</label>
+                        <label>Ring Area ≈</label>
                         <input type="number" id="q1a-input" step="0.1" placeholder="Enter value (use π ≈ 3.14)">
+                        <span> square units</span>
                     </div>
                     <button class="check-btn" onclick="checkNumericAnswer('q1a', 31.4, 0.5)">Check Answer</button>
                     <div class="feedback" id="q1a-feedback"></div>
                     
-                    <p style="margin-top: 20px;"><strong>(b)</strong> Approximately how much population is in this ring?</p>
-                    <p class="hint">Hint: \(\Delta P \approx \rho(D) \cdot 2\pi D \cdot \Delta D\)</p>
+                    <p style="margin-top: 20px;"><strong>(b)</strong> If density is 2 people per square unit and the ring has area 31.4 square units, how much population is in this ring?</p>
+                    <p class="hint">Hint: Population = Density × Area</p>
                     <div class="number-input">
                         <label>\(\Delta P\) ≈</label>
                         <input type="number" id="q1b-input" step="1" placeholder="Enter value">
@@ -148,6 +139,21 @@
                     </div>
                     <button class="check-btn" onclick="checkNumericAnswer('q1b', 62.8, 1)">Check Answer</button>
                     <div class="feedback" id="q1b-feedback"></div>
+                    
+                    <p style="margin-top: 20px;"><strong>(c)</strong> Write a general formula for population \(\Delta P\) in a ring at distance \(D\) with width \(\Delta D\) and density \(\rho(D)\).</p>
+                    <div class="options">
+                        <div class="option" onclick="selectRadio(this, 'q1c', 'a')">
+                            <input type="radio" name="q1c" value="a"> \(\Delta P = \rho(D) \cdot 2\pi D \cdot \Delta D\)
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'q1c', 'b')">
+                            <input type="radio" name="q1c" value="b"> \(\Delta P = \rho(D) \cdot \pi D^2\)
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'q1c', 'c')">
+                            <input type="radio" name="q1c" value="c"> \(\Delta P = \rho(D) \cdot D \cdot \Delta D\)
+                        </div>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('q1c', 'a')">Check Answer</button>
+                    <div class="feedback" id="q1c-feedback"></div>
                 </div>
                 
                 <div class="question" id="q2">

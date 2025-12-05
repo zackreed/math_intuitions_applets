@@ -1,28 +1,33 @@
 # Math Intuitions Applets
 
-A collection of interactive applets for learning mathematical concepts.
+This repository contains interactive HTML5/JavaScript applets and walkthroughs for visualizing key mathematical concepts, designed for discovery-based learning. Each applet is paired with a conceptual walkthrough page featuring guided questions, interactive quizzes, and embedded symbolic computation.
 
 ## Structure
 
-- `index.html`: Landing page listing all available walkthroughs.
-- `pages/`: Contains the walkthrough pages (e.g., `svd-walkthrough.html`).
-- `applets/`: Contains the standalone interactive applets (e.g., `vector-projection-applet.html`).
-- `css/`: Shared stylesheets (`styles.css`).
-- `js/`: Shared JavaScript utilities and logic (`quiz.js`, `utils.js`).
+- `index.html` — Main navigation page
+- `applets/` — Standalone HTML visualizations (canvas-based)
+- `pages/` — Walkthrough pages with quizzes and explorations
+- `css/` — Shared stylesheets (`applet-styles.css`, `styles.css`)
+- `js/` — Shared JavaScript utilities (`canvas-utils.js`, `quiz.js`, `utils.js`)
 
-## Available Applets
+## Applets & Walkthroughs
+- Chain Rule Visualization
+- Circle Series Visualization
+- Local Linearity Explorer
+- Population Density Visualization
+- Tortoise-Hare Race
+- Vector Projection
 
-### Singular Value Decomposition (SVD)
-- **Walkthrough**: [SVD Walkthrough](pages/svd-walkthrough.html)
-- **Applet**: [Vector Projection Applet](applets/vector-projection-applet.html)
+## Features
+- Consistent theming via CSS variables
+- Efficient, modular JavaScript for canvas interactions
+- Discovery-based questions and quizzes
+- Embedded SageMath/SymPy cells for symbolic computation
+- KaTeX for math rendering
 
-### Interactive Derivatives Explorer
-- **Walkthrough**: [Derivatives Explorer](pages/differential-walkthrough.html)
-- **Applet**: [Differential Visualization](applets/differential-viz-dynamic.html)
+## License
+See LICENSE file for copyright and usage information.
 
-## Contributing
+---
 
-To add a new applet:
-1. Create the applet HTML file in `applets/`.
-2. Create a walkthrough page in `pages/` linking to the applet.
-3. Add a link to the walkthrough in `index.html`.
+© 2025 Zackery Reed. All rights reserved.

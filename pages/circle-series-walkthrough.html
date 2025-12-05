@@ -27,16 +27,13 @@
                 <p>A <strong>geometric series</strong> is a sum where each term is a constant ratio times the previous term. This visualization uses circle sectors to show how an infinite series can converge to a finite value.</p>
                 
                 <div class="key-concepts">
-                    <h4>Key Concept: Geometric Series Formula</h4>
-                    <p>A geometric series has the form:</p>
+                    <h4>Key Concept: Geometric Series</h4>
+                    <p>A <strong>geometric series</strong> is a sum where each term is a constant ratio times the previous term:</p>
                     <p style="text-align: center; font-size: 1.3em; margin: 15px 0;">
-                        \(S = a + ar + ar^2 + ar^3 + \cdots = \sum_{n=0}^{\infty} ar^n\)
+                        \(S = a + ar + ar^2 + ar^3 + \cdots\)
                     </p>
-                    <p>where \(a\) is the first term and \(r\) is the common ratio.</p>
-                    <p style="margin-top: 15px;"><strong>Convergence:</strong> If \(|r| < 1\), the series converges to:</p>
-                    <p style="text-align: center; font-size: 1.4em; margin: 15px 0;">
-                        \(S = \frac{a}{1 - r}\)
-                    </p>
+                    <p>where \(a\) is the first term and \(r\) is the common ratio between consecutive terms.</p>
+                    <p style="margin-top: 15px;"><strong>Your Goal:</strong> Through the visualization and questions below, you'll discover whether infinite series can have finite sums, and if so, what determines the sum's value!</p>
                 </div>
             </div>
             
@@ -123,7 +120,7 @@
                 <h2>📝 Practice Questions</h2>
                 
                 <div class="question" id="q1">
-                    <h4>Question 1: Geometric Series Sum</h4>
+                    <h4>Question 1: Discovering the Pattern</h4>
                     <p>Consider the series \(1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots\)</p>
                     <p><strong>(a)</strong> What is the first term \(a\)?</p>
                     <div class="number-input">
@@ -133,7 +130,7 @@
                     <button class="check-btn" onclick="checkNumericAnswer('q1a', 1, 0.01)">Check Answer</button>
                     <div class="feedback" id="q1a-feedback"></div>
                     
-                    <p style="margin-top: 20px;"><strong>(b)</strong> What is the common ratio \(r\)?</p>
+                    <p style="margin-top: 20px;"><strong>(b)</strong> What is the common ratio \(r\) (the number you multiply each term by to get the next)?</p>
                     <div class="number-input">
                         <label>\(r\) =</label>
                         <input type="number" id="q1b-input" step="0.1" placeholder="Enter value">
@@ -141,13 +138,22 @@
                     <button class="check-btn" onclick="checkNumericAnswer('q1b', 0.5, 0.01)">Check Answer</button>
                     <div class="feedback" id="q1b-feedback"></div>
                     
-                    <p style="margin-top: 20px;"><strong>(c)</strong> Using \(S = \frac{a}{1-r}\), what is the sum of the infinite series?</p>
+                    <p style="margin-top: 20px;"><strong>(c)</strong> Add up the first few terms: \(1 + 0.5 + 0.25 + 0.125 + 0.0625 = ?\)</p>
+                    <p class="hint">This is the partial sum \(S_5\)</p>
                     <div class="number-input">
-                        <label>\(S\) =</label>
-                        <input type="number" id="q1c-input" step="0.1" placeholder="Enter value">
+                        <label>\(S_5\) =</label>
+                        <input type="number" id="q1c-input" step="0.01" placeholder="Enter value">
                     </div>
-                    <button class="check-btn" onclick="checkNumericAnswer('q1c', 2, 0.01)">Check Answer</button>
+                    <button class="check-btn" onclick="checkNumericAnswer('q1c', 1.9375, 0.01)">Check Answer</button>
                     <div class="feedback" id="q1c-feedback"></div>
+                    
+                    <p style="margin-top: 20px;"><strong>(d)</strong> Based on the pattern, what value does the infinite sum appear to approach?</p>
+                    <div class="number-input">
+                        <label>\(S_{\infty}\) ≈</label>
+                        <input type="number" id="q1d-input" step="0.1" placeholder="Enter value">
+                    </div>
+                    <button class="check-btn" onclick="checkNumericAnswer('q1d', 2, 0.1)">Check Answer</button>
+                    <div class="feedback" id="q1d-feedback"></div>
                 </div>
                 
                 <div class="question" id="q2">
@@ -179,18 +185,32 @@
                 </div>
                 
                 <div class="question" id="q3">
-                    <h4>Question 3: Partial Sum</h4>
-                    <p>The partial sum of the first \(n\) terms of a geometric series is:</p>
-                    <p style="text-align: center; font-size: 1.2em; margin: 10px 0;">
-                        \(S_n = a\frac{1 - r^n}{1 - r}\)
-                    </p>
-                    <p>For the series \(3 + 1.5 + 0.75 + \cdots\) (where \(a = 3\) and \(r = 0.5\)), what is \(S_5\) (sum of first 5 terms)?</p>
+                    <h4>Question 3: Finding the Limit Formula</h4>
+                    <p>You've seen that \(1 + \frac{1}{2} + \frac{1}{4} + \cdots\) approaches 2. Let's discover the general pattern!</p>
+                    <p><strong>(a)</strong> For a series with \(a = 1\) and \(r = \frac{1}{2}\), the sum is 2. Try to express 2 in terms of \(a\) and \(r\).</p>
+                    <p class="hint">Hint: Notice that \(2 = \frac{1}{1 - \frac{1}{2}} = \frac{a}{1-r}\)</p>
+                    <p><strong>(b)</strong> Test this formula: For \(a = 3\) and \(r = \frac{1}{3}\), what should the infinite sum be?</p>
                     <div class="number-input">
-                        <label>\(S_5\) =</label>
+                        <label>\(S\) =</label>
                         <input type="number" id="q3-input" step="0.01" placeholder="Enter value">
                     </div>
-                    <button class="check-btn" onclick="checkNumericAnswer('q3', 5.8125, 0.01)">Check Answer</button>
+                    <button class="check-btn" onclick="checkNumericAnswer('q3', 4.5, 0.1)">Check Answer</button>
                     <div class="feedback" id="q3-feedback"></div>
+                    
+                    <p style="margin-top: 20px;"><strong>(c)</strong> Based on these examples, what is the general formula for the sum of a convergent geometric series?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectRadio(this, 'q3c', 'a')">
+                            <input type="radio" name="q3c" value="a"> \(S = \frac{a}{1-r}\) when \(|r| < 1\)
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'q3c', 'b')">
+                            <input type="radio" name="q3c" value="b"> \(S = a \cdot r\)
+                        </div>
+                        <div class="option" onclick="selectRadio(this, 'q3c', 'c')">
+                            <input type="radio" name="q3c" value="c"> \(S = \frac{a + r}{2}\)
+                        </div>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('q3c', 'a')">Check Answer</button>
+                    <div class="feedback" id="q3c-feedback"></div>
                 </div>
             </div>
             

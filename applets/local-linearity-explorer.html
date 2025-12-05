@@ -607,11 +607,24 @@
                 `Δy/Δx = ${aroc.toFixed(6)}`;
         }
         
-        // Mouse handlers
-        canvas.addEventListener('mousedown', (e) => {
+        // Mouse handlers with proper coordinate handling
+        function getMousePos(evt) {
             const rect = canvas.getBoundingClientRect();
-            const cx = e.clientX - rect.left;
-            const cy = e.clientY - rect.top;
+            const style = window.getComputedStyle(canvas);
+            const borderLeft = parseFloat(style.borderLeftWidth) || 0;
+            const borderTop = parseFloat(style.borderTopWidth) || 0;
+            
+            const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            
+            return {
+                x: evt.clientX - rect.left - borderLeft + scrollX,
+                y: evt.clientY - rect.top - borderTop + scrollY
+            };
+        }
+        
+        canvas.addEventListener('mousedown', (e) => {
+            const pos = getMousePos(e);
             
             const func = functions[currentFunction];
             const bounds = {
@@ -625,8 +638,8 @@
             const pointCanvas = mathToCanvas(pointX, pointY, bounds);
             
             const dist = Math.sqrt(
-                (cx - pointCanvas.cx) ** 2 + 
-                (cy - pointCanvas.cy) ** 2
+                (pos.x - pointCanvas.cx) ** 2 + 
+                (pos.y - pointCanvas.cy) ** 2
             );
             
             if (dist < 15) {
@@ -636,8 +649,7 @@
         
         canvas.addEventListener('mousemove', (e) => {
             if (isDragging) {
-                const rect = canvas.getBoundingClientRect();
-                const cx = e.clientX - rect.left;
+                const pos = getMousePos(e);
                 
                 const func = functions[currentFunction];
                 const bounds = {
@@ -647,7 +659,7 @@
                     yMax: func.yMax
                 };
                 
-                const { x } = canvasToMath(cx, 0, bounds);
+                const { x } = canvasToMath(pos.x, 0, bounds);
                 pointX = Math.max(func.xMin, Math.min(func.xMax, x));
                 
                 draw();
