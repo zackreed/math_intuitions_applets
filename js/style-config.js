@@ -2,20 +2,23 @@
  * Style Configuration System
  * ===========================
  * 
- * Central management for color schemes across all applets and pages.
+ * Developer-only color scheme management for applets and pages.
+ * This is NOT a user-facing feature - schemes are set in code only.
  * 
  * Usage:
  * ------
  * 1. Include this file after color-schemes.js in your HTML
- * 2. Set a global color scheme: StyleConfig.setGlobalScheme('dark_muted_pastels')
- * 3. Override for specific elements: StyleConfig.setScheme(element, 'erau')
- * 4. Get colors in JavaScript: StyleConfig.getColor('highlight')
+ * 2. Set scheme globally: In global-scheme-config.js or page script
+ * 3. Get colors in JavaScript: styleConfig.getColor('highlight')
+ * 
+ * To change the global scheme:
+ * - Edit js/global-scheme-config.js, OR
+ * - Add to your page: <script>styleConfig.setScheme('dark_muted_pastels');</script>
  * 
  * Features:
  * ---------
  * - Global scheme selection (applies to entire page)
  * - Per-element scheme overrides
- * - Local storage persistence
  * - Easy color access in JavaScript
  * - Fallback to default scheme
  */
@@ -23,11 +26,7 @@
 class StyleConfig {
     constructor() {
         this.DEFAULT_SCHEME = 'default';
-        this.STORAGE_KEY = 'math_applets_color_scheme';
         this.currentScheme = this.DEFAULT_SCHEME;
-        
-        // Load saved scheme from localStorage
-        this.loadSavedScheme();
     }
     
     /**
@@ -47,9 +46,8 @@ class StyleConfig {
     /**
      * Set global color scheme for the entire page/applet
      * @param {string} schemeName - Name of the color scheme to apply
-     * @param {boolean} persist - Whether to save to localStorage (default: true)
      */
-    setGlobalScheme(schemeName, persist = true) {
+    setScheme(schemeName) {
         if (!COLOR_SCHEMES[schemeName]) {
             console.warn(`Color scheme '${schemeName}' not found. Using '${this.DEFAULT_SCHEME}'.`);
             schemeName = this.DEFAULT_SCHEME;
@@ -63,12 +61,7 @@ class StyleConfig {
         // Also apply to body for backward compatibility
         document.body.setAttribute('data-color-scheme', schemeName);
         
-        // Save to localStorage if requested
-        if (persist) {
-            this.saveScheme(schemeName);
-        }
-        
-        // Dispatch custom event for listeners
+        // Dispatch custom event for listeners (e.g., canvas redraw)
         window.dispatchEvent(new CustomEvent('colorSchemeChanged', {
             detail: { scheme: schemeName }
         }));
@@ -77,11 +70,11 @@ class StyleConfig {
     }
     
     /**
-     * Set color scheme for a specific element
+     * Set color scheme for a specific element (advanced use)
      * @param {HTMLElement} element - The element to apply the scheme to
      * @param {string} schemeName - Name of the color scheme
      */
-    setScheme(element, schemeName) {
+    setElementScheme(element, schemeName) {
         if (!COLOR_SCHEMES[schemeName]) {
             console.warn(`Color scheme '${schemeName}' not found.`);
             return;
@@ -148,93 +141,15 @@ class StyleConfig {
     }
     
     /**
-     * Create a scheme selector dropdown UI element
-     * @param {object} options - Configuration options
-     * @returns {HTMLElement} The select element
-     */
-    createSchemeSelector(options = {}) {
-        const {
-            id = 'scheme-selector',
-            label = 'Color Scheme:',
-            containerClass = 'scheme-selector-container'
-        } = options;
-        
-        const container = document.createElement('div');
-        container.className = containerClass;
-        
-        if (label) {
-            const labelEl = document.createElement('label');
-            labelEl.textContent = label;
-            labelEl.htmlFor = id;
-            container.appendChild(labelEl);
-        }
-        
-        const select = document.createElement('select');
-        select.id = id;
-        
-        const schemes = this.getAvailableSchemes();
-        schemes.forEach(scheme => {
-            const option = document.createElement('option');
-            option.value = scheme;
-            option.textContent = scheme.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            if (scheme === this.currentScheme) {
-                option.selected = true;
-            }
-            select.appendChild(option);
-        });
-        
-        select.addEventListener('change', (e) => {
-            this.setGlobalScheme(e.target.value);
-        });
-        
-        container.appendChild(select);
-        return container;
-    }
-    
-    /**
-     * Save scheme to localStorage
-     */
-    saveScheme(schemeName) {
-        try {
-            localStorage.setItem(this.STORAGE_KEY, schemeName);
-        } catch (e) {
-            console.warn('Could not save color scheme to localStorage:', e);
-        }
-    }
-    
-    /**
-     * Load saved scheme from localStorage
-     */
-    loadSavedScheme() {
-        try {
-            const saved = localStorage.getItem(this.STORAGE_KEY);
-            if (saved && COLOR_SCHEMES[saved]) {
-                this.currentScheme = saved;
-            }
-        } catch (e) {
-            console.warn('Could not load color scheme from localStorage:', e);
-        }
-    }
-    
-    /**
      * Reset to default scheme
      */
     reset() {
-        this.setGlobalScheme(this.DEFAULT_SCHEME);
+        this.setScheme(this.DEFAULT_SCHEME);
     }
 }
 
 // Create global instance
 const styleConfig = new StyleConfig();
-
-// Auto-apply saved scheme on page load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        styleConfig.setGlobalScheme(styleConfig.currentScheme, false);
-    });
-} else {
-    styleConfig.setGlobalScheme(styleConfig.currentScheme, false);
-}
 
 // Export for use in modules or global scope
 if (typeof module !== 'undefined' && module.exports) {

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vector Projection Applet</title>
+    <link rel="stylesheet" href="../css/color-schemes.css">
+    <link rel="stylesheet" href="../css/applet-styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -468,33 +470,33 @@
                     // Circle removed - no longer drawing it
                     
                     this.drawLine({ x: -5, y: -5 * this.A.y / this.A.x }, 
-                                 { x: 5, y: 5 * this.A.y / this.A.x }, '#0d92f4', 3);
+                                 { x: 5, y: 5 * this.A.y / this.A.x }, styleConfig.getColor('accent'), 3);
                     
-                    this.drawVector({ x: 0, y: 0 }, this.A, '#0d92f4', 5);
-                    this.drawX(this.A, '#0d92f4', 10);
+                    this.drawVector({ x: 0, y: 0 }, this.A, styleConfig.getColor('accent'), 5);
+                    this.drawX(this.A, styleConfig.getColor('accent'), 10);
                     
                     if (this.showProjections) {
                         this.projections1.forEach((proj, i) => {
-                            this.drawVector({ x: 0, y: 0 }, proj, '#77e4c8', 2);
+                            this.drawVector({ x: 0, y: 0 }, proj, styleConfig.getColor('highlight'), 2);
                         });
                     }
                     
                     if (this.showDistances) {
                         this.points1.forEach((p, i) => {
                             const proj = this.projections1[i];
-                            this.drawSegment(p, proj, '#ff6b9d', 2, true);
+                            this.drawSegment(p, proj, styleConfig.getColor('tangent'), 2, true);
                         });
                     }
                     
-                    this.points1.forEach(p => this.drawPoint(p, '#c44569', 6));
+                    this.points1.forEach(p => this.drawPoint(p, styleConfig.getColor('dot'), 6));
                     
                     if (this.showProjections) {
-                        this.projections1.forEach(p => this.drawPoint(p, '#77e4c8', 5));
+                        this.projections1.forEach(p => this.drawPoint(p, styleConfig.getColor('highlight'), 5));
                     }
                 }
 
                 drawGrid() {
-                    this.ctx.strokeStyle = '#1e3a5f';
+                    this.ctx.strokeStyle = styleConfig.getColor('grid');
                     this.ctx.lineWidth = 1;
                     
                     for (let i = -10; i <= 10; i++) {
@@ -510,7 +512,7 @@
                         this.ctx.stroke();
                     }
                     
-                    this.ctx.strokeStyle = '#3a5f8f';
+                    this.ctx.strokeStyle = styleConfig.getColor('border');
                     this.ctx.lineWidth = 2;
                     this.ctx.beginPath();
                     this.ctx.moveTo(this.originX, 0);
@@ -538,7 +540,7 @@
                     this.ctx.fill();
                     
                     if (label) {
-                        this.ctx.fillStyle = '#e8e8e8';
+                        this.ctx.fillStyle = styleConfig.getColor('text');
                         this.ctx.font = '14px Arial';
                         this.ctx.fillText(label, screen.x + 10, screen.y - 10);
                     }
@@ -655,6 +657,16 @@
                 }, 100);
             }
         })();
+        
+        // Listen for color scheme changes
+        window.addEventListener('colorSchemeChanged', () => {
+            if (window.appInstance) {
+                window.appInstance.draw();
+            }
+        });
     </script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

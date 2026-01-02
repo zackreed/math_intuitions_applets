@@ -2,20 +2,17 @@
 
 This repository contains interactive HTML5/JavaScript applets and walkthroughs for visualizing key mathematical concepts, designed for discovery-based learning. Each applet is paired with a conceptual walkthrough page featuring guided questions, interactive quizzes, and embedded symbolic computation.
 
-## 🎨 NEW: Color Scheme System
+## 🎨 Color Scheme System
 
-The repository now features a **unified color scheme system** that provides:
+The repository features a **unified color scheme system** for consistent styling:
 - **10 professional color schemes** (from classic 3Blue1Brown to modern pastels)
-- **Dynamic scheme switching** with persistent user preferences
-- **Centralized color management** across all applets and pages
-- **Flexible configuration** - set globally or per-applet
+- **Developer-controlled** - set once in code, applies everywhere
+- **No user-facing controls** - users see your chosen theme
+- **Easy to change** - edit one line to switch the entire site's colors
 
-**Quick Start:**
-- See `COLOR_SCHEME_QUICK_REF.md` for quick reference
-- See `COLOR_SCHEME_INTEGRATION.md` for complete documentation
-- See `FILE_STRUCTURE_GUIDE.md` for file structure and migration guide
+**To change the color scheme:** Edit `/js/global-scheme-config.js` and uncomment your preferred scheme.
 
-**Try it now:** Open `applets/geometric-series.html` and use the color scheme selector!
+**Documentation:** See `COLOR_SCHEME_GUIDE.md` for complete instructions.
 
 ## Structure
 
@@ -23,28 +20,27 @@ The repository now features a **unified color scheme system** that provides:
 - `applets/` — Standalone HTML visualizations (canvas-based)
 - `pages/` — Walkthrough pages with quizzes and explorations
 - `css/` — Shared stylesheets
-  - `color-schemes.css` — Color scheme CSS variables ⭐
-  - `applet-styles.css` — Base applet styles (uses color schemes)
-  - `styles.css` — Page styles (uses color schemes)
+  - `color-schemes.css` — Color scheme CSS variables
+  - `applet-styles.css` — Base applet styles
+  - `styles.css` — Page styles
 - `js/` — Shared JavaScript utilities
-  - `color-schemes.js` — Color scheme data ⭐
-  - `style-config.js` — Central color management system ⭐
-  - `global-scheme-config.js` — Optional global configuration ⭐
-  - `canvas-utils.js`, `quiz.js`, `utils.js` — Existing utilities
-- `New Styles/` — Original Python source for color schemes and animations
+  - `color-schemes.js` — Color scheme data
+  - `style-config.js` — Color management API
+  - `global-scheme-config.js` — Default scheme configuration ⚙️
+  - `canvas-utils.js`, `quiz.js`, `utils.js` — Utilities
+- `New Styles/` — Original Python source for color schemes
 
 ## Applets & Walkthroughs
 - Chain Rule Visualization
 - Circle Series Visualization
-- Geometric Series Visualization ✅ (updated with color schemes)
+- Geometric Series Visualization
 - Local Linearity Explorer
 - Population Density Visualization
 - Tortoise-Hare Race
 - Vector Projection
 
 ## Features
-- **Unified color scheme system** with 10 professional themes ⭐
-- Dynamic scheme switching with localStorage persistence ⭐
+- **Unified color scheme system** with 10 professional themes
 - Consistent theming via CSS variables
 - Efficient, modular JavaScript for canvas interactions
 - Discovery-based questions and quizzes
@@ -54,15 +50,14 @@ The repository now features a **unified color scheme system** that provides:
 ## Documentation
 
 ### Color Scheme System
-- `COLOR_SCHEME_QUICK_REF.md` — Quick reference and common patterns
-- `COLOR_SCHEME_INTEGRATION.md` — Complete guide with API reference
-- `FILE_STRUCTURE_GUIDE.md` — File structure and migration guide
-- `IMPLEMENTATION_SUMMARY.md` — System overview and implementation details
+- `COLOR_SCHEME_GUIDE.md` — **START HERE** - Complete guide for using color schemes
+- `New Styles/UNIFIED_STYLE_README.md` — Original documentation for Python source
 
-### New Styles (Source)
-- `New Styles/UNIFIED_STYLE_README.md` — Original documentation
-- `New Styles/QUICK_START.md` — Quick start for Python source
-- `New Styles/STYLE_GUIDE.md` — Detailed style guide
+### Legacy Documentation (for reference)
+- `COLOR_SCHEME_QUICK_REF.md`
+- `COLOR_SCHEME_INTEGRATION.md`
+- `FILE_STRUCTURE_GUIDE.md`
+- `IMPLEMENTATION_SUMMARY.md`
 
 ## License
 See LICENSE file for copyright and usage information.

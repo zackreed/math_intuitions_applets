@@ -2,86 +2,55 @@
  * Global Color Scheme Configuration
  * ===================================
  * 
- * Use this file to set project-wide color scheme defaults.
- * Include this file AFTER style-config.js to override the default scheme.
+ * Set the default color scheme for your entire project here.
+ * This is a DEVELOPER setting, not exposed to users.
  * 
  * Usage:
  * ------
- * 1. Uncomment one of the preset configurations below, or
- * 2. Create your own custom configuration
- * 3. Include in your HTML: <script src="../js/global-scheme-config.js"></script>
+ * 1. Uncomment ONE of the options below to set your default scheme
+ * 2. Include this file in your HTML AFTER style-config.js
+ * 3. The scheme will be applied automatically to all pages/applets that include it
+ * 
+ * To override on a specific page, add to that page's script:
+ * <script>styleConfig.setScheme('different_scheme');</script>
  */
 
 // =============================================================================
-// PRESET CONFIGURATIONS
+// CHOOSE YOUR DEFAULT SCHEME
 // =============================================================================
 
-// Option 1: Use default (classic 3Blue1Brown style)
-// No configuration needed - this is the default
+// Uncomment ONE line below to set the global default:
 
-// Option 2: Modern soft pastels (recommended for general use)
-styleConfig.setGlobalScheme('dark_muted_pastels', false);
-
-// Option 3: ERAU branding (for university content)
-// styleConfig.setGlobalScheme('erau', false);
-
-// Option 4: High contrast (for accessibility)
-// styleConfig.setGlobalScheme('high_contrast', false);
-
-// Option 5: Cool ocean theme (calm, professional)
-// styleConfig.setGlobalScheme('cool_ocean', false);
-
-// =============================================================================
-// ACTIVE CONFIGURATION
-// =============================================================================
-
-// Uncomment the line below to set your preferred default scheme
-// Replace 'default' with any scheme name from COLOR_SCHEME_QUICK_REF.md
-
-// styleConfig.setGlobalScheme('default', false);
+// styleConfig.setScheme('default');                  // Classic 3Blue1Brown style
+styleConfig.setScheme('dark_muted_pastels');       // Modern soft pastels (RECOMMENDED)
+// styleConfig.setScheme('deep_jewel_tones');         // Sophisticated elegance
+// styleConfig.setScheme('contrasting_vibrancy');     // High energy, bold
+// styleConfig.setScheme('erau');                     // ERAU university branding
+// styleConfig.setScheme('dark');                     // Contemporary dark theme
+// styleConfig.setScheme('high_contrast');            // Maximum accessibility
+// styleConfig.setScheme('warm_sunset');              // Cozy, inviting
+// styleConfig.setScheme('cool_ocean');               // Calm, professional
+// styleConfig.setScheme('forest_earth');             // Natural, grounded
 
 
 // =============================================================================
-// ADVANCED: Per-Context Configuration
+// ADVANCED: Per-Context Configuration (Optional)
 // =============================================================================
 
 /**
- * You can also set different schemes based on the current page/context:
+ * Uncomment the code below if you want different schemes for different sections
  */
 
 /*
-// Detect page type and apply appropriate scheme
 (function() {
     const path = window.location.pathname;
     
     if (path.includes('/applets/')) {
-        // All applets use dark muted pastels
-        styleConfig.setGlobalScheme('dark_muted_pastels', false);
+        styleConfig.setScheme('dark_muted_pastels');
     } else if (path.includes('/pages/')) {
-        // Walkthrough pages use default scheme
-        styleConfig.setGlobalScheme('default', false);
+        styleConfig.setScheme('default');
     } else if (path.includes('index.html')) {
-        // Home page uses cool ocean
-        styleConfig.setGlobalScheme('cool_ocean', false);
+        styleConfig.setScheme('cool_ocean');
     }
-    // If none match, use whatever was saved in localStorage
 })();
 */
-
-
-// =============================================================================
-// NOTES
-// =============================================================================
-
-/**
- * The second parameter (false) prevents saving to localStorage.
- * This means:
- * - The scheme is set on page load
- * - User selections are still saved and respected
- * - Next time user visits, their saved preference will be used
- * 
- * If you want to FORCE a scheme (ignore user preferences):
- * styleConfig.setGlobalScheme('my_scheme', true);
- * 
- * Then remove the scheme selector from your pages to prevent users from changing it.
- */

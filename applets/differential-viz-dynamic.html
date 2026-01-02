@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Dynamic Differential Visualization</title>
+    <link rel="stylesheet" href="../css/color-schemes.css">
+    <link rel="stylesheet" href="../css/applet-styles.css">
     <style>
         body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #0a0e27; color: #eee; display: flex; gap: 20px; min-height: 100vh; }
         canvas { border: 2px solid #4a5568; background: #16213e; box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: crosshair; }
@@ -109,14 +111,14 @@ function toZ(x,y,cx,cy,s){return[zoomP.x+280*0.25+(x-cx)*s,zoomP.y+110-(y-cy)*s]
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
  // Axes
- ctx.strokeStyle='#4a5568';ctx.lineWidth=2;
+ ctx.strokeStyle=styleConfig.getColor('border');ctx.lineWidth=2;
  const [x1,y1]=toC(xMin,0),[x2,y2]=toC(xMax,0);
  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
  const [x3,y3]=toC(0,yMin),[x4,y4]=toC(0,yMax);
  ctx.beginPath();ctx.moveTo(x3,y3);ctx.lineTo(x4,y4);ctx.stroke();
  
  // Grid
- ctx.strokeStyle='#2d3748';ctx.lineWidth=1;ctx.setLineDash([2,2]);
+ ctx.strokeStyle=styleConfig.getColor('grid');ctx.lineWidth=1;ctx.setLineDash([2,2]);
  for(let x=Math.ceil(xMin);x<=Math.floor(xMax);x++){
   const [c1,cy1]=toC(x,yMin),[c2,cy2]=toC(x,yMax);
   ctx.beginPath();ctx.moveTo(c1,cy1);ctx.lineTo(c2,cy2);ctx.stroke();
@@ -124,7 +126,7 @@ function draw(){
  ctx.setLineDash([]);
  
  // Function
- ctx.strokeStyle='#4ecca3';ctx.lineWidth=3;ctx.beginPath();
+ ctx.strokeStyle=styleConfig.getColor('accent');ctx.lineWidth=3;ctx.beginPath();
  let start=false;
  for(let x=xMin;x<=xMax;x+=(xMax-xMin)/200){
   try{
@@ -140,23 +142,23 @@ function draw(){
  
  // Point
  const py=f(px),[ppx,ppy]=toC(px,py);
- ctx.strokeStyle='#ffe66d';ctx.lineWidth=2;
+ ctx.strokeStyle=styleConfig.getColor('highlight');ctx.lineWidth=2;
  ctx.strokeRect(ppx-40,ppy-40,80,80);
- ctx.fillStyle='#e94560';ctx.beginPath();ctx.arc(ppx,ppy,10,0,2*Math.PI);ctx.fill();
- ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+ ctx.fillStyle=styleConfig.getColor('dot');ctx.beginPath();ctx.arc(ppx,ppy,10,0,2*Math.PI);ctx.fill();
+ ctx.strokeStyle=styleConfig.getColor('text');ctx.lineWidth=2;ctx.stroke();
  
  // Coords
  ctx.font='italic 16px Georgia';
  const txt=`(${px.toFixed(2)}, ${py.toFixed(2)})`;
- ctx.fillStyle='#eee';
+ ctx.fillStyle=styleConfig.getColor('text');
  const tw=ctx.measureText(txt).width;
- ctx.fillStyle='#16213e';ctx.fillRect(ppx+17,ppy+11,tw+6,20);
+ ctx.fillStyle=styleConfig.getColor('background');ctx.fillRect(ppx+17,ppy+11,tw+6,20);
  let xo=ppx+20;
- ctx.fillStyle='#eee';ctx.fillText('(',xo,ppy+25);xo+=ctx.measureText('(').width;
- ctx.fillStyle='#e94560';ctx.fillText(px.toFixed(2),xo,ppy+25);xo+=ctx.measureText(px.toFixed(2)).width;
- ctx.fillStyle='#eee';ctx.fillText(', ',xo,ppy+25);xo+=ctx.measureText(', ').width;
- ctx.fillStyle='#4ecca3';ctx.fillText(py.toFixed(2),xo,ppy+25);xo+=ctx.measureText(py.toFixed(2)).width;
- ctx.fillStyle='#eee';ctx.fillText(')',xo,ppy+25);
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText('(',xo,ppy+25);xo+=ctx.measureText('(').width;
+ ctx.fillStyle=styleConfig.getColor('dot');ctx.fillText(px.toFixed(2),xo,ppy+25);xo+=ctx.measureText(px.toFixed(2)).width;
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText(', ',xo,ppy+25);xo+=ctx.measureText(', ').width;
+ ctx.fillStyle=styleConfig.getColor('accent');ctx.fillText(py.toFixed(2),xo,ppy+25);xo+=ctx.measureText(py.toFixed(2)).width;
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText(')',xo,ppy+25);
  
  drawLegend();
  drawZoom();
@@ -164,13 +166,13 @@ function draw(){
 
 function drawLegend(){
  const sl=deriv(px);
- ctx.fillStyle='rgba(15,52,96,0.9)';ctx.fillRect(legP.x,legP.y,240,105);
- ctx.strokeStyle='#4a5568';ctx.lineWidth=2;ctx.strokeRect(legP.x,legP.y,240,105);
- ctx.font='bold 14px Arial';ctx.fillStyle='#ffe66d';ctx.textAlign='left';
+ ctx.fillStyle=styleConfig.getColor('background');ctx.fillRect(legP.x,legP.y,240,105);
+ ctx.strokeStyle=styleConfig.getColor('border');ctx.lineWidth=2;ctx.strokeRect(legP.x,legP.y,240,105);
+ ctx.font='bold 14px Arial';ctx.fillStyle=styleConfig.getColor('highlight');ctx.textAlign='left';
  ctx.fillText('Legend',legP.x+5,legP.y+18);
  ctx.font='italic 20px Georgia';
  let xp=legP.x+15,yp=legP.y+43;
- ctx.fillStyle='#4ecca3';ctx.fillText('y = ',xp,yp);xp+=ctx.measureText('y = ').width;
+ ctx.fillStyle=styleConfig.getColor('accent');ctx.fillText('y = ',xp,yp);xp+=ctx.measureText('y = ').width;
  
  // Convert function to nice math notation
  let display=fs.replace(/\*/g,'');
@@ -198,17 +200,17 @@ function drawLegend(){
  }
  
  yp=legP.y+68;xp=legP.x+15;
- ctx.fillStyle='#4ecca3';ctx.fillText('dy',xp,yp);xp+=ctx.measureText('dy').width;
- ctx.fillStyle='#eee';ctx.fillText('/',xp,yp);xp+=ctx.measureText('/').width;
- ctx.fillStyle='#ffe66d';ctx.fillText('dx',xp,yp);xp+=ctx.measureText('dx').width;
- ctx.fillStyle='#eee';ctx.fillText(' = ',xp,yp);xp+=ctx.measureText(' = ').width;
- ctx.fillStyle='#ff9d76';ctx.fillText(sl.toFixed(2),xp,yp);
+ ctx.fillStyle=styleConfig.getColor('accent');ctx.fillText('dy',xp,yp);xp+=ctx.measureText('dy').width;
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText('/',xp,yp);xp+=ctx.measureText('/').width;
+ ctx.fillStyle=styleConfig.getColor('highlight');ctx.fillText('dx',xp,yp);xp+=ctx.measureText('dx').width;
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText(' = ',xp,yp);xp+=ctx.measureText(' = ').width;
+ ctx.fillStyle=styleConfig.getColor('tangent');ctx.fillText(sl.toFixed(2),xp,yp);
  yp=legP.y+93;xp=legP.x+15;
- ctx.fillStyle='#4ecca3';ctx.fillText('dy',xp,yp);xp+=ctx.measureText('dy').width;
- ctx.fillStyle='#eee';ctx.fillText(' = ',xp,yp);xp+=ctx.measureText(' = ').width;
- ctx.fillStyle='#ff9d76';ctx.fillText(sl.toFixed(2),xp,yp);xp+=ctx.measureText(sl.toFixed(2)).width;
- ctx.fillStyle='#eee';ctx.fillText(' · ',xp,yp);xp+=ctx.measureText(' · ').width;
- ctx.fillStyle='#ffe66d';ctx.fillText('dx',xp,yp);
+ ctx.fillStyle=styleConfig.getColor('accent');ctx.fillText('dy',xp,yp);xp+=ctx.measureText('dy').width;
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText(' = ',xp,yp);xp+=ctx.measureText(' = ').width;
+ ctx.fillStyle=styleConfig.getColor('tangent');ctx.fillText(sl.toFixed(2),xp,yp);xp+=ctx.measureText(sl.toFixed(2)).width;
+ ctx.fillStyle=styleConfig.getColor('text');ctx.fillText(' · ',xp,yp);xp+=ctx.measureText(' · ').width;
+ ctx.fillStyle=styleConfig.getColor('highlight');ctx.fillText('dx',xp,yp);
 }
 
 function drawZoom(){
@@ -217,11 +219,11 @@ function drawZoom(){
  const md=Math.max(Math.abs(dx),Math.abs(dy))*1.4;
  const sc=Math.min(280,220)/(2*md);
  ctx.save();ctx.beginPath();ctx.rect(zoomP.x,zoomP.y,280,220);ctx.clip();
- ctx.fillStyle='rgba(22,33,62,0.95)';ctx.fillRect(zoomP.x,zoomP.y,280,220);
- ctx.strokeStyle='#ffe66d';ctx.lineWidth=3;ctx.strokeRect(zoomP.x,zoomP.y,280,220);
+ ctx.fillStyle=styleConfig.getColor('background');ctx.fillRect(zoomP.x,zoomP.y,280,220);
+ ctx.strokeStyle=styleConfig.getColor('highlight');ctx.lineWidth=3;ctx.strokeRect(zoomP.x,zoomP.y,280,220);
  
  // Function
- ctx.strokeStyle='#4ecca3';ctx.lineWidth=3;ctx.beginPath();start=false;
+ ctx.strokeStyle=styleConfig.getColor('accent');ctx.lineWidth=3;ctx.beginPath();start=false;
  for(let x=cx-md;x<=cx+md;x+=md/100){
   try{
    const y=f(x);
@@ -239,7 +241,7 @@ function drawZoom(){
  // Tangent - always shown
  const [tx1,ty1]=toZ(cx-md*0.9,cy+sl*(cx-md*0.9-cx),cx,cy,sc);
  const [tx2,ty2]=toZ(cx+md*0.9,cy+sl*(cx+md*0.9-cx),cx,cy,sc);
- ctx.strokeStyle='#ff9d76';ctx.lineWidth=3;ctx.setLineDash([8,4]);
+ ctx.strokeStyle=styleConfig.getColor('tangent');ctx.lineWidth=3;ctx.setLineDash([8,4]);
  ctx.beginPath();ctx.moveTo(tx1,ty1);ctx.lineTo(tx2,ty2);ctx.stroke();
  ctx.setLineDash([]);
  
@@ -247,14 +249,14 @@ function drawZoom(){
  if(showD){
   const dxe=cx+dx;
   const [dx1,dy1]=toZ(cx,cy,cx,cy,sc),[dx2,dy2]=toZ(dxe,cy,cx,cy,sc);
-  ctx.strokeStyle='#ffe66d';ctx.lineWidth=4;
+  ctx.strokeStyle=styleConfig.getColor('highlight');ctx.lineWidth=4;
   ctx.beginPath();ctx.moveTo(dx1,dy1);ctx.lineTo(dx2,dy2);ctx.stroke();
   const a1=Math.atan2(dy2-dy1,dx2-dx1),al=12;
   ctx.beginPath();ctx.moveTo(dx2,dy2);
   ctx.lineTo(dx2-al*Math.cos(a1-Math.PI/6),dy2-al*Math.sin(a1-Math.PI/6));
   ctx.lineTo(dx2-al*0.5*Math.cos(a1),dy2-al*0.5*Math.sin(a1));
   ctx.lineTo(dx2-al*Math.cos(a1+Math.PI/6),dy2-al*Math.sin(a1+Math.PI/6));
-  ctx.closePath();ctx.fillStyle='#ffe66d';ctx.fill();
+  ctx.closePath();ctx.fillStyle=styleConfig.getColor('highlight');ctx.fill();
   const [dmx,dmy]=toZ((cx+dxe)/2,cy,cx,cy,sc);
   ctx.font='italic 18px Georgia';ctx.textAlign='center';ctx.fillText('dx',dmx,dmy+25);
   
@@ -265,39 +267,39 @@ function drawZoom(){
    let cury=cy;
    for(let i=0;i<wp;i++){
     const [vx1,vy1]=toZ(vsx,cury,cx,cy,sc),[vx2,vy2]=toZ(vsx,cury+Math.sign(sl)*dx,cx,cy,sc);
-    ctx.strokeStyle='#ff9d76';ctx.lineWidth=3;
+    ctx.strokeStyle=styleConfig.getColor('tangent');ctx.lineWidth=3;
     ctx.beginPath();ctx.moveTo(vx1,vy1);ctx.lineTo(vx2,vy2);ctx.stroke();
     const va=Math.atan2(vy2-vy1,vx2-vx1),vl=10;
     ctx.beginPath();ctx.moveTo(vx2,vy2);
     ctx.lineTo(vx2-vl*Math.cos(va-Math.PI/6),vy2-vl*Math.sin(va-Math.PI/6));
     ctx.lineTo(vx2-vl*0.5*Math.cos(va),vy2-vl*0.5*Math.sin(va));
     ctx.lineTo(vx2-vl*Math.cos(va+Math.PI/6),vy2-vl*Math.sin(va+Math.PI/6));
-    ctx.closePath();ctx.fillStyle='#ff9d76';ctx.fill();
+    ctx.closePath();ctx.fillStyle=styleConfig.getColor('tangent');ctx.fill();
     const [vmx,vmy]=toZ(vsx,cury+Math.sign(sl)*dx/2,cx,cy,sc);
-    ctx.fillStyle='#ffe66d';ctx.font='italic 14px Georgia';ctx.fillText('dx',vmx+30,vmy);
+    ctx.fillStyle=styleConfig.getColor('highlight');ctx.font='italic 14px Georgia';ctx.fillText('dx',vmx+30,vmy);
     cury+=Math.sign(sl)*dx;
    }
    if(fp>0.05){
     const [vx1,vy1]=toZ(vsx,cury,cx,cy,sc),[vx2,vy2]=toZ(vsx,cury+Math.sign(sl)*fp*dx,cx,cy,sc);
-    ctx.strokeStyle='#ff9d76';ctx.lineWidth=3;
+    ctx.strokeStyle=styleConfig.getColor('tangent');ctx.lineWidth=3;
     ctx.beginPath();ctx.moveTo(vx1,vy1);ctx.lineTo(vx2,vy2);ctx.stroke();
     const va=Math.atan2(vy2-vy1,vx2-vx1),vl=10;
     ctx.beginPath();ctx.moveTo(vx2,vy2);
     ctx.lineTo(vx2-vl*Math.cos(va-Math.PI/6),vy2-vl*Math.sin(va-Math.PI/6));
     ctx.lineTo(vx2-vl*0.5*Math.cos(va),vy2-vl*0.5*Math.sin(va));
     ctx.lineTo(vx2-vl*Math.cos(va+Math.PI/6),vy2-vl*Math.sin(va+Math.PI/6));
-    ctx.closePath();ctx.fillStyle='#ff9d76';ctx.fill();
+    ctx.closePath();ctx.fillStyle=styleConfig.getColor('tangent');ctx.fill();
     const [vmx,vmy]=toZ(vsx,cury+Math.sign(sl)*fp*dx/2,cx,cy,sc);
     ctx.font='italic 12px Georgia';
-    ctx.fillStyle='#ff9d76';ctx.fillText(fp.toFixed(2),vmx+30,vmy);
-    ctx.fillStyle='#ffe66d';ctx.fillText(' dx',vmx+45,vmy);
+    ctx.fillStyle=styleConfig.getColor('tangent');ctx.fillText(fp.toFixed(2),vmx+30,vmy);
+    ctx.fillStyle=styleConfig.getColor('highlight');ctx.fillText(' dx',vmx+45,vmy);
    }
   }
  }
  
- ctx.fillStyle='#e94560';ctx.beginPath();ctx.arc(zpx,zpy,9,0,2*Math.PI);ctx.fill();
- ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
- ctx.font='bold 14px Arial';ctx.fillStyle='#ffe66d';ctx.textAlign='center';
+ ctx.fillStyle=styleConfig.getColor('dot');ctx.beginPath();ctx.arc(zpx,zpy,9,0,2*Math.PI);ctx.fill();
+ ctx.strokeStyle=styleConfig.getColor('text');ctx.lineWidth=2;ctx.stroke();
+ ctx.font='bold 14px Arial';ctx.fillStyle=styleConfig.getColor('highlight');ctx.textAlign='center';
  ctx.fillText('Zoomed View',zoomP.x+140,zoomP.y+18);
  ctx.restore();
 }
@@ -339,6 +341,14 @@ document.getElementById('update').addEventListener('click',()=>{
 });
 
 calcY();calcPos();draw();
+
+// Listen for color scheme changes
+window.addEventListener('colorSchemeChanged', () => {
+    draw();
+});
     </script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Population Density Visualization</title>
+    <link rel="stylesheet" href="../css/color-schemes.css">
     <link rel="stylesheet" href="../css/applet-styles.css">
     <style>
         * {
@@ -254,13 +255,15 @@
         
         // Draw building icon
         function drawBuilding(x, y, size, darkness) {
-            ctx.fillStyle = `rgba(60, 60, 60, ${darkness})`;
+            const buildingColor = styleConfig.getColor('text');
+            ctx.fillStyle = buildingColor.replace('rgb', 'rgba').replace(')', `, ${darkness})`);
             
             // Simple building shape
             ctx.fillRect(x - size/2, y - size, size, size);
             
             // Windows
-            ctx.fillStyle = `rgba(255, 255, 200, ${darkness * 0.6})`;
+            const windowColor = styleConfig.getColor('highlight');
+            ctx.fillStyle = windowColor.replace('rgb', 'rgba').replace(')', `, ${darkness * 0.6})`);
             const windowSize = size / 4;
             for (let i = 0; i < 2; i++) {
                 for (let j = 0; j < 2; j++) {
@@ -276,13 +279,13 @@
         
         // Draw skyscraper in center
         function drawSkyscraper(x, y, size) {
-            ctx.fillStyle = '#2c3e50';
+            ctx.fillStyle = styleConfig.getColor('text');
             
             // Main building
             ctx.fillRect(x - size/2, y - size * 2, size, size * 2);
             
             // Windows
-            ctx.fillStyle = '#f39c12';
+            ctx.fillStyle = styleConfig.getColor('accent');
             const windowSize = size / 5;
             for (let i = 0; i < 3; i++) {
                 for (let j = 0; j < 6; j++) {
@@ -296,7 +299,7 @@
             }
             
             // Antenna
-            ctx.strokeStyle = '#34495e';
+            ctx.strokeStyle = styleConfig.getColor('text');
             ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.moveTo(x, y - size * 2);
@@ -345,7 +348,7 @@
                 ctx.fill();
                 
                 // Draw border
-                ctx.strokeStyle = isHighlighted ? '#e94560' : 'rgba(0, 0, 0, 0.2)';
+                ctx.strokeStyle = isHighlighted ? styleConfig.getColor('highlight') : styleConfig.getColor('border');
                 ctx.lineWidth = isHighlighted ? 3 : 1;
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, outerR * scale, 0, Math.PI * 2);
@@ -370,7 +373,7 @@
             
             // Draw current position indicator
             const currentRadius = D * scale;
-            ctx.strokeStyle = '#e94560';
+            ctx.strokeStyle = styleConfig.getColor('highlight');
             ctx.lineWidth = 3;
             ctx.setLineDash([8, 4]);
             ctx.beginPath();
@@ -379,20 +382,20 @@
             ctx.setLineDash([]);
             
             // Draw labels
-            ctx.fillStyle = '#2c3e50';
+            ctx.fillStyle = styleConfig.getColor('text');
             ctx.font = 'bold 16px Arial';
             ctx.textAlign = 'center';
             ctx.fillText('City Center', centerX, centerY + 70);
             
             // Draw distance marker
-            ctx.fillStyle = '#e94560';
+            ctx.fillStyle = styleConfig.getColor('highlight');
             ctx.font = 'bold 14px Arial';
             const markerX = centerX + currentRadius * Math.cos(Math.PI / 4);
             const markerY = centerY + currentRadius * Math.sin(Math.PI / 4);
             ctx.fillText(`D = ${D.toFixed(2)}`, markerX + 20, markerY - 10);
             
             // Draw scale
-            ctx.fillStyle = '#2c3e50';
+            ctx.fillStyle = styleConfig.getColor('text');
             ctx.font = '12px Arial';
             ctx.textAlign = 'left';
             ctx.fillText('0', centerX + 5, centerY + 5);
@@ -478,6 +481,14 @@
         generateBuildings();
         updateDisplays();
         draw();
+        
+        // Listen for color scheme changes
+        window.addEventListener('colorSchemeChanged', () => {
+            draw();
+        });
     </script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>
