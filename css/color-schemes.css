@@ -1,0 +1,153 @@
+/* Auto-generated color schemes for web use */
+/* Generated from unified_color_schemes.py */
+
+/* default color scheme */
+[data-color-scheme='default'] {
+  --text-background: #000000;
+  --text: #FFFFFF;
+  --text-surrounding: #000000;
+  --background: #000000;
+  --highlight: #FFFF00;
+  --accent: #58C4DD;
+  --time: #C55F73;
+  --displacement: #83C167;
+  --dot: #FC6255;
+  --contrast-1: #FF8C00;
+  --contrast-2: #00CED1;
+}
+
+/* dark_muted_pastels color scheme */
+[data-color-scheme='dark_muted_pastels'] {
+  --text-background: #2C2C2C;
+  --text: #E4E4E4;
+  --text-surrounding: #2C2C2C;
+  --background: #2C2C2C;
+  --highlight: #ABDADC;
+  --accent: #FFC1CC;
+  --time: #B39CD0;
+  --displacement: #B2DFDB;
+  --dot: #FF6B6B;
+  --contrast-1: #FFB74D;
+  --contrast-2: #81C784;
+}
+
+/* deep_jewel_tones color scheme */
+[data-color-scheme='deep_jewel_tones'] {
+  --text-background: #1a1a1a;
+  --text: #f0f0f0;
+  --text-surrounding: #1a1a1a;
+  --background: #1a1a1a;
+  --highlight: #004d61;
+  --accent: #822659;
+  --time: #3e5641;
+  --displacement: #90EE90;
+  --dot: #FF6B6B;
+  --contrast-1: #FFB74D;
+  --contrast-2: #9C27B0;
+}
+
+/* contrasting_vibrancy color scheme */
+[data-color-scheme='contrasting_vibrancy'] {
+  --text-background: #181818;
+  --text: #f7f7f7;
+  --text-surrounding: #181818;
+  --background: #181818;
+  --highlight: #ff5722;
+  --accent: #673ab7;
+  --time: #ffeb3b;
+  --displacement: #009688;
+  --dot: #e91e63;
+  --contrast-1: #c2185b;
+  --contrast-2: #4caf50;
+}
+
+/* erau color scheme */
+[data-color-scheme='erau'] {
+  --text-background: #03539E;
+  --text: #FFFFFF;
+  --text-surrounding: #FFCB06;
+  --background: #000000;
+  --highlight: #FFCB06;
+  --accent: #01B2E3;
+  --time: #FFE066;
+  --displacement: #90EE90;
+  --dot: #FF6B6B;
+  --contrast-1: #FF1493;
+  --contrast-2: #32CD32;
+}
+
+/* dark color scheme */
+[data-color-scheme='dark'] {
+  --text-background: #000000;
+  --text: #E0E0E0;
+  --text-surrounding: #000000;
+  --background: #000000;
+  --highlight: #FF6B6B;
+  --accent: #4ECDC4;
+  --time: #45B7D1;
+  --displacement: #96CEB4;
+  --dot: #FECA57;
+  --contrast-1: #FF69B4;
+  --contrast-2: #00FA9A;
+}
+
+/* high_contrast color scheme */
+[data-color-scheme='high_contrast'] {
+  --text-background: #000000;
+  --text: #FFFFFF;
+  --text-surrounding: #000000;
+  --background: #000000;
+  --highlight: #FFFF00;
+  --accent: #00FFFF;
+  --time: #FF00FF;
+  --displacement: #00FF00;
+  --dot: #FF0000;
+  --contrast-1: #FFA500;
+  --contrast-2: #8A2BE2;
+}
+
+/* warm_sunset color scheme */
+[data-color-scheme='warm_sunset'] {
+  --text-background: #1a0f0a;
+  --text: #fff8f0;
+  --text-surrounding: #2a1810;
+  --background: #1a0f0a;
+  --highlight: #ff6b35;
+  --accent: #f7931e;
+  --time: #fdc500;
+  --displacement: #c1666b;
+  --dot: #d62828;
+  --contrast-1: #fcbf49;
+  --contrast-2: #8b4513;
+}
+
+/* cool_ocean color scheme */
+[data-color-scheme='cool_ocean'] {
+  --text-background: #0a1f2e;
+  --text: #e8f4f8;
+  --text-surrounding: #0a1f2e;
+  --background: #0a1f2e;
+  --highlight: #00d9ff;
+  --accent: #1e90ff;
+  --time: #40e0d0;
+  --displacement: #7fffd4;
+  --dot: #ff6b9d;
+  --contrast-1: #ff1493;
+  --contrast-2: #00fa9a;
+}
+
+/* forest_earth color scheme */
+[data-color-scheme='forest_earth'] {
+  --text-background: #1a2e1a;
+  --text: #f0f8f0;
+  --text-surrounding: #1a2e1a;
+  --background: #1a2e1a;
+  --highlight: #90ee90;
+  --accent: #8fbc8f;
+  --time: #daa520;
+  --displacement: #9acd32;
+  --dot: #dc143c;
+  --contrast-1: #ff8c00;
+  --contrast-2: #4682b4;
+}
+

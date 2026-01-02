@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geometric Series Visualization</title>
+    <link rel="stylesheet" href="../css/color-schemes.css">
+    <link rel="stylesheet" href="../css/applet-styles.css">
     <style>
         body {
             margin: 0;
             padding: 20px;
             font-family: Arial, sans-serif;
-            background: #0a0e27;
-            color: #eee;
             display: flex;
             gap: 20px;
             min-height: 100vh;
         }
         canvas {
-            border: 2px solid #4a5568;
-            background: #16213e;
+            border: 2px solid var(--border-color, #4a5568);
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         #controls {
             width: 300px;
-            background: #0f3460;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
@@ -31,12 +29,10 @@
         }
         h2 {
             margin-top: 0;
-            color: #e94560;
-            border-bottom: 2px solid #e94560;
+            border-bottom: 2px solid var(--accent-primary);
             padding-bottom: 10px;
         }
         h3 {
-            color: #4ecca3;
             font-size: 16px;
             margin-top: 20px;
         }
@@ -46,24 +42,18 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: #4ecca3;
             font-size: 14px;
         }
         input[type="number"] {
             width: 100%;
             padding: 8px;
-            background: #16213e;
-            border: 1px solid #4a5568;
             border-radius: 4px;
-            color: #eee;
             font-size: 14px;
             box-sizing: border-box;
         }
         button {
             width: 100%;
             padding: 12px;
-            background: #4ecca3;
-            color: #0a0e27;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -73,23 +63,13 @@
             transition: all 0.3s;
         }
         button:hover {
-            background: #3db894;
             transform: translateY(-2px);
         }
-        button.secondary {
-            background: #e94560;
-            color: #fff;
-        }
-        button.secondary:hover {
-            background: #c93952;
-        }
         .value-display {
-            color: #4ecca3;
             font-weight: bold;
             font-size: 16px;
         }
         .result-box {
-            background: #16213e;
             padding: 15px;
             border-radius: 4px;
             margin-top: 10px;
@@ -98,21 +78,41 @@
         }
         .formula {
             font-family: 'Courier New', monospace;
-            background: #0f1925;
             padding: 10px;
             border-radius: 4px;
             margin: 8px 0;
             text-align: center;
-            color: #4ecca3;
             font-size: 15px;
         }
         .info-box {
-            background: #16213e;
             padding: 15px;
             border-radius: 4px;
             margin-top: 10px;
             font-size: 13px;
             line-height: 1.6;
+        }
+        
+        /* Scheme selector styling */
+        .scheme-selector-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 2px solid var(--accent-primary);
+        }
+        .scheme-selector-container label {
+            color: var(--accent-primary);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .scheme-selector-container select {
+            width: 100%;
+            padding: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -166,10 +166,31 @@
         </div>
     </div>
 
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
     <script>
+// Insert scheme selector at the top of controls
+const controls = document.getElementById('controls');
+const schemeSelectorContainer = styleConfig.createSchemeSelector({
+    label: '🎨 Color Scheme:'
+});
+controls.insertBefore(schemeSelectorContainer, controls.firstChild);
+
 const c=document.getElementById('canvas'),ctx=c.getContext('2d');
 let a=2,b=2.5,n=0;
-const colors=['#4ecca3','#ff6b6b','#f9d423','#00d2ff','#a8e6cf','#ffd3b6','#ffaaa5','#ff8b94','#c7ceea','#b5ead7','#e2f0cb','#ffdac1'];
+
+// Dynamic color palette from the current scheme
+function getColors() {
+    return [
+        styleConfig.getColor('highlight'),
+        styleConfig.getColor('dot'),
+        styleConfig.getColor('time'),
+        styleConfig.getColor('accent'),
+        styleConfig.getColor('displacement'),
+        styleConfig.getColor('contrast_1'),
+        styleConfig.getColor('contrast_2')
+    ];
+}
 
 function getRects(){
  const rs=[];
@@ -196,9 +217,17 @@ function getZoom(){
 }
 
 function draw(){
- ctx.clearRect(0,0,c.width,c.height);
+ const colors = getColors();
+ const bgColor = styleConfig.getColor('background');
+ const textColor = styleConfig.getColor('text');
+ const borderColor = styleConfig.getCSSVariable('border-color') || '#4a5568';
+ const highlightColor = styleConfig.getColor('time');
+ 
+ ctx.fillStyle = bgColor;
+ ctx.fillRect(0, 0, c.width, c.height);
+ 
  const p=50,mw=450,mh=mw*(b/a),mx=p,my=p;
- ctx.strokeStyle='#4a5568';ctx.lineWidth=3;ctx.strokeRect(mx,my,mw,mh);
+ ctx.strokeStyle=borderColor;ctx.lineWidth=3;ctx.strokeRect(mx,my,mw,mh);
  
  const rs=getRects();
  rs.forEach((r,i)=>{
@@ -206,7 +235,7 @@ function draw(){
   ctx.fillStyle=colors[i%colors.length]+'CC';ctx.fillRect(rx,ry,rw,rh);
   ctx.strokeStyle=colors[i%colors.length];ctx.lineWidth=1.5;ctx.strokeRect(rx,ry,rw,rh);
   if(rw>40&&rh>30){
-   ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+   ctx.fillStyle=textColor;ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
    ctx.fillText((r.w*r.h).toFixed(3),rx+rw/2,ry+rh/2);
   }
  });
@@ -214,20 +243,20 @@ function draw(){
  const z=getZoom();
  if(z&&z.w>0.01){
   const zx=mx+z.x*(mw/a),zy=my+(b-z.y-z.h)*(mh/b),zw=z.w*(mw/a),zh=z.h*(mh/b);
-  ctx.strokeStyle='#ffe66d';ctx.lineWidth=3;ctx.setLineDash([8,4]);ctx.strokeRect(zx,zy,zw,zh);ctx.setLineDash([]);
-  drawZoom(z);
+  ctx.strokeStyle=highlightColor;ctx.lineWidth=3;ctx.setLineDash([8,4]);ctx.strokeRect(zx,zy,zw,zh);ctx.setLineDash([]);
+  drawZoom(z, colors, bgColor, textColor, borderColor, highlightColor);
  }
  
- ctx.fillStyle='#aaa';ctx.font='14px Arial';ctx.textAlign='center';
+ ctx.fillStyle=textColor;ctx.font='14px Arial';ctx.textAlign='center';
  ctx.fillText(`Width = ${a.toFixed(1)}`,mx+mw/2,my+mh+30);
  ctx.save();ctx.translate(mx-30,my+mh/2);ctx.rotate(-Math.PI/2);ctx.fillText(`Height = ${b.toFixed(1)}`,0,0);ctx.restore();
 }
 
-function drawZoom(z){
+function drawZoom(z, colors, bgColor, textColor, borderColor, highlightColor){
  const zs=220,zx=c.width-zs-70,zy=80;
- ctx.fillStyle='#0f1925';ctx.fillRect(zx-5,zy-5,zs+10,zs+10);
- ctx.strokeStyle='#ffe66d';ctx.lineWidth=3;ctx.strokeRect(zx,zy,zs,zs);
- ctx.fillStyle='#ffe66d';ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText('ZOOM',zx+zs/2,zy-10);
+ ctx.fillStyle=bgColor;ctx.fillRect(zx-5,zy-5,zs+10,zs+10);
+ ctx.strokeStyle=highlightColor;ctx.lineWidth=3;ctx.strokeRect(zx,zy,zs,zs);
+ ctx.fillStyle=highlightColor;ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText('ZOOM',zx+zs/2,zy-10);
  
  const sx=zs/z.w,sy=zs/z.h,rs=getRects();
  rs.forEach((r,i)=>{
@@ -238,7 +267,7 @@ function drawZoom(z){
    ctx.fillStyle=colors[i%colors.length]+'CC';ctx.fillRect(cx,cy,cw,ch);
    ctx.strokeStyle=colors[i%colors.length];ctx.lineWidth=1.5;ctx.strokeRect(cx,cy,cw,ch);
    if(cw>35&&ch>25){
-    ctx.fillStyle='#fff';ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle=textColor;ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
     ctx.fillText((r.w*r.h).toFixed(5),cx+cw/2,cy+ch/2);
    }
   }
@@ -263,6 +292,11 @@ function updateDisplays(){
   document.getElementById('term-formula').innerHTML=`a<sub>${n}</sub> = ${td}`;
  }
 }
+
+// Listen for scheme changes and redraw
+window.addEventListener('colorSchemeChanged', () => {
+    draw();
+});
 
 document.getElementById('width-input').addEventListener('input',e=>{a=parseFloat(e.target.value)||2;updateDisplays();draw();});
 document.getElementById('height-input').addEventListener('input',e=>{b=parseFloat(e.target.value)||2.5;updateDisplays();draw();});

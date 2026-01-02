@@ -5,13 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geometric Series - Convergence</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/color-schemes.css">
     <link rel="stylesheet" href="../css/styles.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/quiz.js"></script>
+    <style>
+        .scheme-selector-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--page-text-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 2px solid var(--page-highlight);
+        }
+        .scheme-selector-wrapper label {
+            color: var(--page-highlight);
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .scheme-selector-wrapper select {
+            width: 200px;
+            padding: 8px;
+            background: var(--page-background);
+            color: var(--page-text);
+            border: 1px solid var(--page-border);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Color Scheme Selector -->
+    <div class="scheme-selector-wrapper" id="scheme-selector-wrapper"></div>
+    
     <div class="page-container">
         <header>
             <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
@@ -216,8 +250,16 @@
     </div>
     
     <script>
-        // Render LaTeX
+        // Initialize color scheme selector
         document.addEventListener("DOMContentLoaded", function() {
+            const wrapper = document.getElementById('scheme-selector-wrapper');
+            const selector = styleConfig.createSchemeSelector({
+                label: '🎨 Color Scheme:',
+                id: 'page-scheme-selector'
+            });
+            wrapper.appendChild(selector);
+            
+            // Render LaTeX
             renderMathInElement(document.body, {
                 delimiters: [
                     {left: "$$", right: "$$", display: true},

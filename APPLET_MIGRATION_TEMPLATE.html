@@ -1,0 +1,205 @@
+<!-- 
+  MIGRATION TEMPLATE FOR APPLETS
+  ==============================
+  
+  Use this as a starting point when migrating an existing applet to the color scheme system.
+  
+  STEPS:
+  1. Copy the HTML template below
+  2. Add your existing canvas and controls HTML
+  3. Update your draw function to use styleConfig.getColor()
+  4. Add colorSchemeChanged event listener
+  5. Test with different color schemes
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Applet Name</title>
+    
+    <!-- Color Scheme Integration -->
+    <link rel="stylesheet" href="../css/color-schemes.css">
+    <link rel="stylesheet" href="../css/applet-styles.css">
+    
+    <!-- Your custom styles (optional) -->
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 20px;
+            min-height: 100vh;
+        }
+        
+        canvas {
+            border: 2px solid var(--border-color, #4a5568);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        #controls {
+            width: 300px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        
+        /* Scheme selector styling */
+        .scheme-selector-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 2px solid var(--accent-primary);
+        }
+        
+        .scheme-selector-container label {
+            color: var(--accent-primary);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .scheme-selector-container select {
+            width: 100%;
+            padding: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+    
+    <div id="controls">
+        <h2>Your Applet Title</h2>
+        
+        <!-- Your controls here -->
+        <div class="control-group">
+            <label>Some Parameter:</label>
+            <input type="range" id="param-slider" min="0" max="100" value="50">
+        </div>
+        
+        <button id="action-btn">Do Something</button>
+    </div>
+
+    <!-- Color Scheme System -->
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    
+    <!-- Your applet code -->
+    <script>
+        // Insert scheme selector at the top of controls
+        const controls = document.getElementById('controls');
+        const schemeSelectorContainer = styleConfig.createSchemeSelector({
+            label: '🎨 Color Scheme:'
+        });
+        controls.insertBefore(schemeSelectorContainer, controls.firstChild);
+
+        // Canvas setup
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Your state variables
+        let param = 50;
+        
+        // Dynamic color palette from current scheme
+        function getColors() {
+            return {
+                background: styleConfig.getColor('background'),
+                text: styleConfig.getColor('text'),
+                highlight: styleConfig.getColor('highlight'),
+                accent: styleConfig.getColor('accent'),
+                dot: styleConfig.getColor('dot'),
+                time: styleConfig.getColor('time'),
+                displacement: styleConfig.getColor('displacement'),
+                contrast1: styleConfig.getColor('contrast_1'),
+                contrast2: styleConfig.getColor('contrast_2')
+            };
+        }
+        
+        // Main draw function
+        function draw() {
+            const colors = getColors();
+            
+            // Clear with background color
+            ctx.fillStyle = colors.background;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Example drawing - replace with your code
+            ctx.strokeStyle = colors.highlight;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(50, 50, 700, 500);
+            
+            ctx.fillStyle = colors.text;
+            ctx.font = '20px Arial';
+            ctx.fillText('Your visualization here', 100, 100);
+            
+            // Use other colors for your specific elements
+            ctx.fillStyle = colors.dot;
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 10, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Listen for color scheme changes
+        window.addEventListener('colorSchemeChanged', () => {
+            draw();
+        });
+        
+        // Event listeners for your controls
+        document.getElementById('param-slider').addEventListener('input', (e) => {
+            param = parseInt(e.target.value);
+            draw();
+        });
+        
+        document.getElementById('action-btn').addEventListener('click', () => {
+            // Your action here
+            draw();
+        });
+        
+        // Initial draw
+        draw();
+    </script>
+</body>
+</html>
+
+<!-- 
+  MIGRATION CHECKLIST:
+  
+  ☐ Added color-schemes.css to <head>
+  ☐ Added applet-styles.css to <head>
+  ☐ Added color-schemes.js before closing </body>
+  ☐ Added style-config.js after color-schemes.js
+  ☐ Added scheme selector creation code
+  ☐ Created getColors() function
+  ☐ Updated draw() to use colors from getColors()
+  ☐ Added colorSchemeChanged event listener
+  ☐ Removed hardcoded color strings
+  ☐ Tested with multiple color schemes
+  ☐ Verified canvas redraws on scheme change
+  
+  COMMON COLOR MAPPINGS:
+  - Background colors → styleConfig.getColor('background')
+  - Text colors → styleConfig.getColor('text')
+  - Primary highlights → styleConfig.getColor('highlight')
+  - Secondary accents → styleConfig.getColor('accent')
+  - Dots/points → styleConfig.getColor('dot')
+  - Time-related → styleConfig.getColor('time')
+  - Position/movement → styleConfig.getColor('displacement')
+  - Additional contrasts → styleConfig.getColor('contrast_1') or 'contrast_2'
+  
+  TIPS:
+  - Keep your existing draw logic, just replace color strings
+  - Test frequently by switching schemes
+  - Use browser console to debug color issues
+  - Reference geometric-series.html for a complete example
+-->
