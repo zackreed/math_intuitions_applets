@@ -446,3 +446,59 @@ footer {
     margin-top: 40px;
     border-radius: 8px;
 }
+
+/* Index Page Styles */
+.header-subtitle {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.back-to-home {
+    color: var(--page-highlight);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.back-to-home:hover {
+    color: var(--page-accent);
+}
+
+.walkthrough-list {
+    list-style: none;
+    padding: 20px;
+}
+
+.walkthrough-item {
+    margin-bottom: 20px;
+    background: var(--page-dark-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--page-highlight);
+}
+
+.walkthrough-item h3 {
+    margin-top: 0;
+}
+
+.walkthrough-item p {
+    margin-top: 10px;
+    color: var(--page-text);
+}
+
+.walkthrough-link {
+    color: var(--page-highlight);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.walkthrough-link:hover {
+    color: var(--page-accent);
+}
+
+.page-footer {
+    text-align: center;
+    margin: 40px 0 10px 0;
+    font-size: 0.95em;
+    color: #888;
+}

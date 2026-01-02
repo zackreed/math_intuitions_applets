@@ -11,17 +11,14 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="../js/color-schemes.js"></script>
-    <script src="../js/style-config.js"></script>
-    <script src="../js/global-scheme-config.js"></script>
     <script src="../js/quiz.js"></script>
 </head>
 <body>
     <div class="page-container">
         <header>
-            <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
+            <a href="../index.html" class="back-to-home">&larr; Back to Home</a>
             <h1>📊 Interactive Derivatives Explorer</h1>
-            <p style="font-size: 1.2em; margin-top: 10px;">Visualize and understand the relationship between functions and their derivatives</p>
+            <p class="header-subtitle">Visualize and understand the relationship between functions and their derivatives</p>
         </header>
         
         <div class="content">
@@ -30,9 +27,9 @@
                 <h2>🎯 Introduction</h2>
                 <p>Welcome to the Interactive Derivatives Explorer! This tool helps you visualize how derivatives work by showing you:</p>
                 <ul>
-                    <li><strong style="color: #4ecca3;">The function</strong> y = f(x) in turquoise</li>
-                    <li><strong style="color: #ffe66d;">Small changes dx</strong> in yellow</li>
-                    <li><strong style="color: #ff9d76;">The rate of change dy/dx</strong> in orange</li>
+                    <li><strong>The function</strong> y = f(x) in turquoise</li>
+                    <li><strong>Small changes dx</strong> in yellow</li>
+                    <li><strong>The rate of change dy/dx</strong> in orange</li>
                     <li>How the derivative relates to the <strong>slope of the tangent line</strong></li>
                 </ul>
                 
@@ -364,5 +361,8 @@ for x_val in test_points:
             evalButtonText: 'Run Code'
         });
     </script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

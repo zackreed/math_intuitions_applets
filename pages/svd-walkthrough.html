@@ -11,9 +11,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="../js/color-schemes.js"></script>
-    <script src="../js/style-config.js"></script>
-    <script src="../js/global-scheme-config.js"></script>
     <script src="../js/quiz.js"></script>
     <script>
         // Wait for SageCell to load before initializing
@@ -77,9 +74,9 @@ print("\\nReconstruction error:", (A - A_reconstructed).norm().n(digits=6))`,
 <body>
     <div class="page-container">
         <header>
-            <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
+            <a href="../index.html" class="back-to-home">&larr; Back to Home</a>
             <h1>Singular Value Decomposition (SVD)</h1>
-            <p style="font-size: 1.2em; margin-top: 10px;">Interactive Exploration with Vector Projections</p>
+            <p class="header-subtitle">Interactive Exploration with Vector Projections</p>
         </header>
 
         <div class="section">
@@ -275,5 +272,8 @@ print("\\nReconstruction error:", (A - A_reconstructed).norm().n(digits=6))`,
             © 2025 Zackery Reed. All rights reserved.
         </footer>
     </div>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

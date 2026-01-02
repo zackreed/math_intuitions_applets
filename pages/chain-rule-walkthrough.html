@@ -11,17 +11,14 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="../js/color-schemes.js"></script>
-    <script src="../js/style-config.js"></script>
-    <script src="../js/global-scheme-config.js"></script>
     <script src="../js/quiz.js"></script>
 </head>
 <body>
     <div class="page-container">
         <header>
-            <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
+            <a href="../index.html" class="back-to-home">&larr; Back to Home</a>
             <h1>⛓️ Chain Rule: Composition and Rate Propagation</h1>
-            <p style="font-size: 1.2em; margin-top: 10px;">Explore how rates of change propagate through composed functions</p>
+            <p class="header-subtitle">Explore how rates of change propagate through composed functions</p>
         </header>
         
         <div class="content">
@@ -255,5 +252,8 @@ print(f"\nSimplified: {simplify(h_prime_chain)}")</div>
             }
         });
     </script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

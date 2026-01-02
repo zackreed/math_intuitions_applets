@@ -11,17 +11,14 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="../js/color-schemes.js"></script>
-    <script src="../js/style-config.js"></script>
-    <script src="../js/global-scheme-config.js"></script>
     <script src="../js/quiz.js"></script>
 </head>
 <body>
     <div class="page-container">
         <header>
-            <a href="../index.html" style="color: #00d9ff; text-decoration: none; font-weight: bold;">&larr; Back to Home</a>
+            <a href="../index.html" class="back-to-home">&larr; Back to Home</a>
             <h1>📐 Local Linearity: From Average to Instantaneous</h1>
-            <p style="font-size: 1.2em; margin-top: 10px;">Explore how functions become linear when zoomed in, and understand derivatives as limits</p>
+            <p class="header-subtitle">Explore how functions become linear when zoomed in, and understand derivatives as limits</p>
         </header>
         
         <div class="content">
@@ -266,5 +263,8 @@ print(f"\nDirect differentiation: f'(x) = {direct_derivative}")</div>
             }
         });
     </script>
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

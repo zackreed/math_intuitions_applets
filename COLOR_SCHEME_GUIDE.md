@@ -12,24 +12,26 @@ All applets and pages have been migrated to use the color scheme system. The inf
 
 ### Quick Start: Change the Global Color Scheme
 
-**Edit `/js/global-scheme-config.js`** and uncomment your preferred scheme:
+**Edit `/js/global-scheme-config.js`** and uncomment your preferred scheme inside the `applyGlobalScheme()` function:
 
 ```javascript
-// Uncomment ONE line:
-
-// styleConfig.setScheme('default');                  // Classic 3Blue1Brown style
-styleConfig.setScheme('dark_muted_pastels');       // Modern soft pastels (ACTIVE)
-// styleConfig.setScheme('deep_jewel_tones');         // Sophisticated elegance
-// styleConfig.setScheme('contrasting_vibrancy');     // High energy, bold
-// styleConfig.setScheme('erau');                     // ERAU university branding
-// styleConfig.setScheme('dark');                     // Contemporary dark theme
-// styleConfig.setScheme('high_contrast');            // Maximum accessibility
-// styleConfig.setScheme('warm_sunset');              // Cozy, inviting
-// styleConfig.setScheme('cool_ocean');               // Calm, professional
-// styleConfig.setScheme('forest_earth');             // Natural, grounded
+function applyGlobalScheme() {
+    // Uncomment ONE line:
+    
+    // styleConfig.setScheme('default');                  // Classic 3Blue1Brown style
+    styleConfig.setScheme('dark_muted_pastels');       // Modern soft pastels (ACTIVE)
+    // styleConfig.setScheme('deep_jewel_tones');         // Sophisticated elegance
+    // styleConfig.setScheme('contrasting_vibrancy');     // High energy, bold
+    // styleConfig.setScheme('erau');                     // ERAU university branding
+    // styleConfig.setScheme('dark');                     // Contemporary dark theme
+    // styleConfig.setScheme('high_contrast');            // Maximum accessibility
+    // styleConfig.setScheme('warm_sunset');              // Cozy, inviting
+    // styleConfig.setScheme('cool_ocean');               // Calm, professional
+    // styleConfig.setScheme('forest_earth');             // Natural, grounded
+}
 ```
 
-That's it! All pages and applets will use that scheme.
+That's it! Refresh your browser (Ctrl+F5 or Cmd+Shift+R) and all pages and applets will use that scheme.
 
 ### Override for a Specific Page
 
