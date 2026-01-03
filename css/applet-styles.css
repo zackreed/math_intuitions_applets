@@ -1,19 +1,19 @@
 /* Shared Applet Styles */
 
-/* Default fallback colors - will be overridden by color schemes */
+/* Common color palette */
 :root {
-    --bg-primary: var(--background, #1a1a2e);
-    --bg-secondary: var(--text-background, #16213e);
-    --bg-tertiary: var(--text-surrounding, #0f3460);
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f3460;
     --bg-dark: #0f1925;
     --border-color: #4a5568;
-    --border-hover: var(--accent, #4ecca3);
-    --text-primary: var(--text, #eee);
+    --border-hover: #4ecca3;
+    --text-primary: #eee;
     --text-secondary: #aaa;
-    --accent-primary: var(--highlight, #e94560);
-    --accent-secondary: var(--accent, #4ecca3);
-    --accent-tertiary: var(--time, #ffe66d);
-    --accent-quaternary: var(--displacement, #ff9d76);
+    --accent-primary: #e94560;
+    --accent-secondary: #4ecca3;
+    --accent-tertiary: #ffe66d;
+    --accent-quaternary: #ff9d76;
 }
 
 /* Reset and base styles */

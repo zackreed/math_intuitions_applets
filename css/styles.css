@@ -1,16 +1,4 @@
 /* Global Styles */
-
-/* Default fallback colors - will be overridden by color schemes */
-:root {
-    --page-background: var(--background, #1a1a2e);
-    --page-text: var(--text, #e8e8e8);
-    --page-text-bg: var(--text-background, #16213e);
-    --page-highlight: var(--highlight, #00d9ff);
-    --page-accent: var(--accent, #77e4c8);
-    --page-border: #0f3460;
-    --page-dark-bg: #0f1925;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -19,8 +7,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--page-background);
-    color: var(--page-text);
+    background: var(--background);
+    color: var(--text);
     line-height: 1.6;
 }
 
@@ -34,7 +22,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    background: var(--page-text-bg);
+    background: var(--text-background);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     padding: 20px;
@@ -42,7 +30,7 @@ body {
 
 /* Headers */
 header {
-    background: var(--page-text-bg);
+    background: var(--text-background);
     padding: 30px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -50,28 +38,28 @@ header {
 }
 
 h1 {
-    color: var(--page-highlight);
+    color: var(--highlight);
     font-size: 2.5em;
     margin-bottom: 10px;
 }
 
 h2 {
-    color: var(--page-highlight);
+    color: var(--highlight);
     font-size: 1.8em;
     margin: 30px 0 15px 0;
-    border-bottom: 2px solid var(--page-border);
+    border-bottom: 2px solid var(--text-surrounding);
     padding-bottom: 10px;
 }
 
 h3 {
-    color: var(--page-accent);
+    color: var(--accent);
     font-size: 1.3em;
     margin: 20px 0 10px 0;
 }
 
 /* Sections & Containers */
 .section {
-    background: var(--page-text-bg);
+    background: var(--text-background);
     padding: 25px;
     border-radius: 8px;
     margin-bottom: 25px;
@@ -79,18 +67,18 @@ h3 {
 }
 
 .applet-container {
-    background: var(--page-dark-bg);
+    background: var(--background);
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
 }
 
 .instructions {
-    background: var(--page-border);
+    background: var(--text-surrounding);
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
-    border-left: 4px solid var(--page-highlight);
+    border-left: 4px solid var(--highlight);
 }
 
 .instructions ol, .instructions ul {
@@ -105,7 +93,7 @@ h3 {
 /* SageMath Container */
 .sage-container {
     margin: 20px 0;
-    border: 2px solid var(--page-border);
+    border: 2px solid var(--text-surrounding);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -116,17 +104,17 @@ h3 {
 }
 
 .question {
-    background: var(--page-text-bg);
+    background: var(--text-surrounding);
     padding: 20px;
     border-radius: 8px;
     margin: 15px 0;
-    border-left: 4px solid var(--page-accent);
+    border-left: 4px solid var(--accent);
 }
 
 .question-text {
     font-size: 1.1em;
     margin-bottom: 15px;
-    color: var(--page-text);
+    color: var(--text);
 }
 
 .options {
@@ -134,7 +122,7 @@ h3 {
 }
 
 .option {
-    background: var(--page-text-bg);
+    background: var(--text-background);
     padding: 12px 15px;
     margin: 8px 0;
     border-radius: 6px;
@@ -144,22 +132,22 @@ h3 {
 }
 
 .option:hover {
-    background: var(--page-dark-bg);
-    border-color: var(--page-highlight);
+    background: var(--text-surrounding);
+    border-color: var(--highlight);
 }
 
 .option.selected {
-    background: var(--page-dark-bg);
-    border-color: var(--page-highlight);
+    background: var(--text-surrounding);
+    border-color: var(--highlight);
 }
 
 .option.correct {
-    background: #2d5016;
+    background: rgba(76, 175, 80, 0.2);
     border-color: #4caf50;
 }
 
 .option.incorrect {
-    background: #5d1616;
+    background: rgba(244, 67, 54, 0.2);
     border-color: #f44336;
 }
 
@@ -176,23 +164,23 @@ h3 {
 }
 
 .number-input input {
-    background: var(--page-dark-bg);
-    border: 2px solid var(--page-border);
+    background: var(--background);
+    border: 2px solid var(--text-surrounding);
     border-radius: 6px;
     padding: 10px 15px;
-    color: var(--page-text);
+    color: var(--text);
     font-size: 1em;
     width: 150px;
 }
 
 .number-input input:focus {
     outline: none;
-    border-color: var(--page-highlight);
+    border-color: var(--highlight);
 }
 
 .check-btn {
-    background: var(--page-highlight);
-    color: var(--page-background);
+    background: var(--highlight);
+    color: var(--background);
     border: none;
     padding: 10px 25px;
     border-radius: 6px;
@@ -203,11 +191,11 @@ h3 {
 }
 
 .check-btn:hover {
-    background: #00b8d4;
+    background: var(--accent);
 }
 
 .check-btn:disabled {
-    background: #0f3460;
+    background: var(--text-surrounding);
     cursor: not-allowed;
     opacity: 0.5;
 }
@@ -221,37 +209,37 @@ h3 {
 }
 
 .feedback.correct {
-    background: #2d5016;
+    background: rgba(76, 175, 80, 0.2);
     color: #4caf50;
     display: block;
 }
 
 .feedback.incorrect {
-    background: #5d1616;
+    background: rgba(244, 67, 54, 0.2);
     color: #f44336;
     display: block;
 }
 
 .hint {
-    background: #1e3a5f;
+    background: var(--text-surrounding);
     padding: 12px;
     border-radius: 6px;
     margin-top: 10px;
     font-style: italic;
-    color: #00d9ff;
+    color: var(--highlight);
 }
 
 /* Code & Math */
 code {
-    background: var(--page-dark-bg);
+    background: var(--background);
     padding: 2px 6px;
     border-radius: 3px;
     font-family: 'Courier New', monospace;
-    color: #77e4c8;
+    color: var(--accent);
 }
 
 pre {
-    background: var(--page-dark-bg);
+    background: var(--background);
     padding: 15px;
     border-radius: 6px;
     overflow-x: auto;
@@ -284,18 +272,18 @@ pre {
 }
 
 canvas {
-    border: 2px solid var(--page-border);
-    background: var(--page-dark-bg);
+    border: 2px solid var(--text-surrounding);
+    background: var(--background);
     cursor: crosshair;
 }
 
 .legend-overlay, .stats-overlay, .vector-overlay {
     position: absolute;
-    background: rgba(22, 33, 62, 0.95);
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    border: 1px solid #0f3460;
-    color: var(--page-text);
+    border: 1px solid var(--text-surrounding);
+    color: var(--text);
 }
 
 .legend-overlay {
@@ -323,7 +311,7 @@ canvas {
 .controls {
     margin: 20px 0;
     padding: 15px;
-    background: #0f3460;
+    background: var(--text-surrounding);
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -339,13 +327,13 @@ canvas {
 textarea {
     width: 100%;
     padding: 8px;
-    border: 1px solid #0f3460;
+    border: 1px solid var(--text-surrounding);
     border-radius: 4px;
     font-family: monospace;
     font-size: 11px;
     resize: vertical;
-    background: var(--page-dark-bg);
-    color: var(--page-text);
+    background: var(--background);
+    color: var(--text);
     min-height: 60px;
 }
 
@@ -358,8 +346,8 @@ textarea {
 button {
     padding: 8px 16px;
     margin: 0;
-    background: #0f3460;
-    color: var(--page-text);
+    background: var(--text-surrounding);
+    color: var(--text);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -370,135 +358,79 @@ button {
 }
 
 button:hover {
-    background: #00b8d4;
+    background: var(--accent);
 }
 
 button.active {
-    background: #00d9ff;
-    color: var(--page-background);
+    background: var(--highlight);
+    color: var(--background);
 }
 
 .legend-item {
     display: flex;
     align-items: center;
     margin: 5px 0;
-    color: var(--page-text);
+    color: var(--text);
 }
 
 .color-box {
     width: 30px;
     height: 20px;
     margin-right: 10px;
-    border: 1px solid #0f3460;
+    border: 1px solid var(--text-surrounding);
 }
 
 /* Differential Walkthrough Specific Styles */
 .exploration {
-    background: #1e3a5f;
-    border-left: 5px solid #4caf50;
+    background: var(--text-surrounding);
+    border-left: 5px solid var(--contrast-1);
     padding: 20px;
     margin: 20px 0;
     border-radius: 5px;
 }
 
 .exploration h4 {
-    color: #4caf50;
+    color: var(--contrast-1);
     margin-bottom: 10px;
     font-size: 1.2em;
 }
 
 .answer-space {
-    background: var(--page-dark-bg);
-    border: 2px dashed #0f3460;
+    background: var(--background);
+    border: 2px dashed var(--text-surrounding);
     padding: 20px;
     margin: 15px 0;
     border-radius: 5px;
     min-height: 80px;
-    color: var(--page-text);
+    color: var(--text);
 }
 
 .answer-space::before {
     content: "Your answer:";
     display: block;
-    color: #00d9ff;
+    color: var(--highlight);
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 .key-concepts {
-    background: #16213e;
+    background: var(--text-background);
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
-    border: 1px solid #0f3460;
+    border: 1px solid var(--text-surrounding);
 }
 
 .key-concepts h4 {
-    color: #00d9ff;
+    color: var(--highlight);
     margin-bottom: 15px;
 }
 
 footer {
-    background: #16213e;
-    color: var(--page-text);
+    background: var(--text-background);
+    color: var(--text);
     padding: 20px;
     text-align: center;
     margin-top: 40px;
     border-radius: 8px;
-}
-
-/* Index Page Styles */
-.header-subtitle {
-    font-size: 1.2em;
-    margin-top: 10px;
-}
-
-.back-to-home {
-    color: var(--page-highlight);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.back-to-home:hover {
-    color: var(--page-accent);
-}
-
-.walkthrough-list {
-    list-style: none;
-    padding: 20px;
-}
-
-.walkthrough-item {
-    margin-bottom: 20px;
-    background: var(--page-dark-bg);
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid var(--page-highlight);
-}
-
-.walkthrough-item h3 {
-    margin-top: 0;
-}
-
-.walkthrough-item p {
-    margin-top: 10px;
-    color: var(--page-text);
-}
-
-.walkthrough-link {
-    color: var(--page-highlight);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.walkthrough-link:hover {
-    color: var(--page-accent);
-}
-
-.page-footer {
-    text-align: center;
-    margin: 40px 0 10px 0;
-    font-size: 0.95em;
-    color: #888;
 }
