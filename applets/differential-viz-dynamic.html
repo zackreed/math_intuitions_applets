@@ -6,20 +6,20 @@
     <link rel="stylesheet" href="../css/color-schemes.css">
     <link rel="stylesheet" href="../css/applet-styles.css">
     <style>
-        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #0a0e27; color: #eee; display: flex; gap: 20px; min-height: 100vh; }
-        canvas { border: 2px solid #4a5568; background: #16213e; box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: crosshair; }
-        #controls { width: 300px; background: #0f3460; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); overflow-y: auto; max-height: 90vh; }
-        h2 { margin-top: 0; color: #e94560; border-bottom: 2px solid #e94560; padding-bottom: 10px; }
-        h3 { color: #4ecca3; font-size: 16px; margin-top: 20px; }
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: var(--background); color: var(--text); display: flex; gap: 20px; min-height: 100vh; }
+        canvas { border: 2px solid var(--border-color); background: var(--text-background); box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: crosshair; }
+        #controls { width: 300px; background: var(--text-background); padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); overflow-y: auto; max-height: 90vh; }
+        h2 { margin-top: 0; color: var(--dot); border-bottom: 2px solid var(--dot); padding-bottom: 10px; }
+        h3 { color: var(--accent); font-size: 16px; margin-top: 20px; }
         .control-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; color: #4ecca3; font-size: 14px; }
-        input[type="text"], input[type="number"] { width: 100%; padding: 8px; background: #16213e; border: 1px solid #4a5568; border-radius: 4px; color: #eee; font-size: 14px; box-sizing: border-box; margin-bottom: 5px; }
-        button { width: 100%; padding: 12px; background: #4ecca3; color: #0a0e27; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; margin: 5px 0; transition: all 0.3s; }
-        button:hover { background: #3db894; transform: translateY(-2px); }
-        .info-box { background: #16213e; padding: 15px; border-radius: 4px; margin-top: 10px; font-size: 14px; line-height: 1.6; }
+        label { display: block; margin-bottom: 5px; color: var(--accent); font-size: 14px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; background: var(--text-background); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text); font-size: 14px; box-sizing: border-box; margin-bottom: 5px; }
+        button { width: 100%; padding: 12px; background: var(--accent); color: var(--background); border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; margin: 5px 0; transition: all 0.3s; }
+        button:hover { background: var(--accent); transform: translateY(-2px); }
+        .info-box { background: var(--text-background); padding: 15px; border-radius: 4px; margin-top: 10px; font-size: 14px; line-height: 1.6; }
         .checkbox-group { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
         input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
-        .error { background: #8b0000; color: #fff; padding: 10px; border-radius: 4px; margin-top: 10px; }
+        .error { background: var(--dot); color: var(--text); padding: 10px; border-radius: 4px; margin-top: 10px; }
     </style>
 </head>
 <body>

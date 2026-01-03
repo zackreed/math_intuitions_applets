@@ -14,8 +14,8 @@
         }
         body {
             font-family: 'Arial', sans-serif;
-            background: #1a1a2e;
-            color: #eee;
+            background: var(--background);
+            color: var(--text);
             display: flex;
             gap: 20px;
             padding: 20px;
@@ -30,15 +30,15 @@
         }
         
         canvas {
-            border: 2px solid #4a5568;
-            background: #e8f4f8;
+            border: 2px solid var(--border-color);
+            background: var(--text-background);
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: block;
         }
         
         #controls {
             width: 340px;
-            background: #0f3460;
+            background: var(--text-background);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
@@ -48,14 +48,14 @@
         
         h2 {
             margin-top: 0;
-            color: #e94560;
-            border-bottom: 2px solid #e94560;
+            color: var(--dot);
+            border-bottom: 2px solid var(--dot);
             padding-bottom: 10px;
             font-size: 20px;
         }
         
         h3 {
-            color: #4ecca3;
+            color: var(--accent);
             font-size: 14px;
             margin-top: 15px;
             margin-bottom: 8px;
@@ -68,7 +68,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: #aaa;
+            color: var(--border-color);
             font-size: 13px;
         }
         
@@ -80,21 +80,21 @@
         input[type="number"] {
             width: 100%;
             padding: 8px;
-            background: #16213e;
-            border: 1px solid #4a5568;
+            background: var(--text-background);
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            color: #e8e8e8;
+            color: var(--text);
             font-size: 14px;
         }
         
         .value-display {
-            color: #4ecca3;
+            color: var(--accent);
             font-weight: bold;
             font-size: 16px;
         }
         
         .result-box {
-            background: #16213e;
+            background: var(--text-background);
             padding: 12px;
             border-radius: 4px;
             margin-top: 8px;
@@ -102,7 +102,7 @@
         }
         
         .info-box {
-            background: #16213e;
+            background: var(--text-background);
             padding: 10px;
             border-radius: 4px;
             font-size: 12px;
@@ -112,12 +112,12 @@
         
         .formula {
             font-family: 'Courier New', monospace;
-            background: #0f1925;
+            background: var(--text-background);
             padding: 8px;
             border-radius: 4px;
             margin: 5px 0;
             text-align: center;
-            color: #4ecca3;
+            color: var(--accent);
             font-size: 13px;
         }
     </style>
@@ -139,7 +139,7 @@
         <div class="result-box">
             <h3 style="margin-top: 0;">Density Function</h3>
             <div class="formula">ρ(D) = 40/(20 + D²)</div>
-            <div style="font-size: 11px; color: #aaa; margin-top: 5px;">
+            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;">
                 Density at distance D from center
             </div>
         </div>
@@ -160,7 +160,7 @@
             <h3 style="margin-top: 0;" id="result-title">Current Ring</h3>
             <div class="formula" id="density-formula">ρ = --</div>
             <div class="formula" id="population-formula">P = --</div>
-            <div style="font-size: 11px; color: #aaa; margin-top: 5px;" id="result-description">
+            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;" id="result-description">
                 Population in ring at distance D
             </div>
         </div>

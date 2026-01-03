@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="../css/color-schemes.css">
     <link rel="stylesheet" href="../css/applet-styles.css">
     <style>
-        body { margin: 0; padding: 10px; font-family: Arial, sans-serif; background: #0a0e27; color: #eee; overflow: hidden; }
+        body { margin: 0; padding: 10px; font-family: Arial, sans-serif; background: var(--background); color: var(--text); overflow: hidden; }
         .container { display: flex; flex-direction: column; gap: 10px; align-items: center; max-height: calc(100vh - 50px); }
-        canvas { border: 2px solid #4a5568; background: #16213e; box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: crosshair; }
-        h1 { text-align: center; color: #e94560; margin: 0 0 5px 0; font-size: 18px; }
+        canvas { border: 2px solid var(--border-color); background: var(--text-background); box-shadow: 0 4px 6px rgba(0,0,0,0.3); cursor: crosshair; }
+        h1 { text-align: center; color: var(--dot); margin: 0 0 5px 0; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -105,7 +105,7 @@ function drawCanvas1() {
     }
     
     // Draw axes
-    ctx1.strokeStyle = '#4a5568';
+    ctx1.strokeStyle = styleConfig.getColor('border-color');
     ctx1.lineWidth = 2;
     const [x1, y1] = toC(xMin, 0);
     const [x2, y2] = toC(xMax, 0);
@@ -122,7 +122,7 @@ function drawCanvas1() {
     ctx1.stroke();
     
     // Draw grid
-    ctx1.strokeStyle = '#2d3748';
+    ctx1.strokeStyle = styleConfig.getColor('border-color');
     ctx1.lineWidth = 1;
     ctx1.setLineDash([2, 2]);
     for (let x = Math.ceil(xMin); x <= Math.floor(xMax); x++) {
@@ -136,7 +136,7 @@ function drawCanvas1() {
     ctx1.setLineDash([]);
     
     // Draw function
-    ctx1.strokeStyle = '#4ecca3';
+    ctx1.strokeStyle = styleConfig.getColor('accent');
     ctx1.lineWidth = 3;
     ctx1.beginPath();
     let start = false;
@@ -159,14 +159,14 @@ function drawCanvas1() {
     // Draw point
     const py = f(px1);
     const [ppx, ppy] = toC(px1, py);
-    ctx1.strokeStyle = '#ffe66d';
+    ctx1.strokeStyle = styleConfig.getColor('time');
     ctx1.lineWidth = 2;
     ctx1.strokeRect(ppx - 40, ppy - 40, 80, 80);
-    ctx1.fillStyle = '#e94560';
+    ctx1.fillStyle = styleConfig.getColor('dot');
     ctx1.beginPath();
     ctx1.arc(ppx, ppy, 10, 0, 2 * Math.PI);
     ctx1.fill();
-    ctx1.strokeStyle = '#fff';
+    ctx1.strokeStyle = styleConfig.getColor('text');
     ctx1.lineWidth = 2;
     ctx1.stroke();
     
@@ -174,73 +174,73 @@ function drawCanvas1() {
     ctx1.font = 'italic 16px Georgia';
     const txt = `(${px1.toFixed(2)}, ${py.toFixed(2)})`;
     const tw = ctx1.measureText(txt).width;
-    ctx1.fillStyle = '#16213e';
+    ctx1.fillStyle = styleConfig.getColor('text-background');
     ctx1.fillRect(ppx + 17, ppy + 11, tw + 6, 20);
     let xo = ppx + 20;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText('(', xo, ppy + 25);
     xo += ctx1.measureText('(').width;
-    ctx1.fillStyle = '#e94560';
+    ctx1.fillStyle = styleConfig.getColor('dot');
     ctx1.fillText(px1.toFixed(2), xo, ppy + 25);
     xo += ctx1.measureText(px1.toFixed(2)).width;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText(', ', xo, ppy + 25);
     xo += ctx1.measureText(', ').width;
-    ctx1.fillStyle = '#4ecca3';
+    ctx1.fillStyle = styleConfig.getColor('accent');
     ctx1.fillText(py.toFixed(2), xo, ppy + 25);
     xo += ctx1.measureText(py.toFixed(2)).width;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText(')', xo, ppy + 25);
     
     // Draw legend
     const sl = fPrime(px1);
     ctx1.fillStyle = 'rgba(15,52,96,0.9)';
     ctx1.fillRect(legP.x, legP.y, 200, 85);
-    ctx1.strokeStyle = '#4a5568';
+    ctx1.strokeStyle = styleConfig.getColor('border-color');
     ctx1.lineWidth = 2;
     ctx1.strokeRect(legP.x, legP.y, 200, 85);
     ctx1.font = 'bold 12px Arial';
-    ctx1.fillStyle = '#ffe66d';
+    ctx1.fillStyle = styleConfig.getColor('time');
     ctx1.textAlign = 'left';
     ctx1.fillText('Legend', legP.x + 5, legP.y + 15);
     ctx1.font = 'italic 16px Georgia';
     let xp = legP.x + 12;
     let yp = legP.y + 35;
-    ctx1.fillStyle = '#4ecca3';
+    ctx1.fillStyle = styleConfig.getColor('accent');
     ctx1.fillText('y = f(x)', xp, yp);
     
     yp = legP.y + 55;
     xp = legP.x + 12;
-    ctx1.fillStyle = '#4ecca3';
+    ctx1.fillStyle = styleConfig.getColor('accent');
     ctx1.fillText('dy', xp, yp);
     xp += ctx1.measureText('dy').width;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText('/', xp, yp);
     xp += ctx1.measureText('/').width;
-    ctx1.fillStyle = '#ffe66d';
+    ctx1.fillStyle = styleConfig.getColor('time');
     ctx1.fillText('dx', xp, yp);
     xp += ctx1.measureText('dx').width;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText(' = ', xp, yp);
     xp += ctx1.measureText(' = ').width;
-    ctx1.fillStyle = '#ff9d76';
+    ctx1.fillStyle = styleConfig.getColor('displacement');
     ctx1.fillText(sl.toFixed(2), xp, yp);
     
     yp = legP.y + 73;
     xp = legP.x + 12;
-    ctx1.fillStyle = '#4ecca3';
+    ctx1.fillStyle = styleConfig.getColor('accent');
     ctx1.fillText('dy', xp, yp);
     xp += ctx1.measureText('dy').width;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText(' = ', xp, yp);
     xp += ctx1.measureText(' = ').width;
-    ctx1.fillStyle = '#ff9d76';
+    ctx1.fillStyle = styleConfig.getColor('displacement');
     ctx1.fillText(sl.toFixed(2), xp, yp);
     xp += ctx1.measureText(sl.toFixed(2)).width;
-    ctx1.fillStyle = '#eee';
+    ctx1.fillStyle = styleConfig.getColor('text');
     ctx1.fillText(' · ', xp, yp);
     xp += ctx1.measureText(' · ').width;
-    ctx1.fillStyle = '#ffe66d';
+    ctx1.fillStyle = styleConfig.getColor('time');
     ctx1.fillText('dx', xp, yp);
     
     // Draw zoom window
@@ -257,12 +257,12 @@ function drawCanvas1() {
     
     ctx1.fillStyle = 'rgba(22,33,62,0.95)';
     ctx1.fillRect(zoomP.x, zoomP.y, zoomW, zoomH);
-    ctx1.strokeStyle = '#ffe66d';
+    ctx1.strokeStyle = styleConfig.getColor('time');
     ctx1.lineWidth = 3;
     ctx1.strokeRect(zoomP.x, zoomP.y, zoomW, zoomH);
     
     // Function in zoom
-    ctx1.strokeStyle = '#4ecca3';
+    ctx1.strokeStyle = styleConfig.getColor('accent');
     ctx1.lineWidth = 3;
     ctx1.beginPath();
     start = false;
@@ -287,7 +287,7 @@ function drawCanvas1() {
     // Tangent
     const [tx1, ty1] = toZ(cx - md * 0.9, cy + sl * (cx - md * 0.9 - cx), cx, cy, sc);
     const [tx2, ty2] = toZ(cx + md * 0.9, cy + sl * (cx + md * 0.9 - cx), cx, cy, sc);
-    ctx1.strokeStyle = '#ff9d76';
+    ctx1.strokeStyle = styleConfig.getColor('displacement');
     ctx1.lineWidth = 3;
     ctx1.setLineDash([8, 4]);
     ctx1.beginPath();
@@ -300,7 +300,7 @@ function drawCanvas1() {
     const dxe = cx + dx;
     const [dx1, dy1] = toZ(cx, cy, cx, cy, sc);
     const [dx2, dy2] = toZ(dxe, cy, cx, cy, sc);
-    ctx1.strokeStyle = '#ffe66d';
+    ctx1.strokeStyle = styleConfig.getColor('time');
     ctx1.lineWidth = 4;
     ctx1.beginPath();
     ctx1.moveTo(dx1, dy1);
@@ -315,7 +315,7 @@ function drawCanvas1() {
     ctx1.lineTo(dx2 - al * 0.5 * Math.cos(a1), dy2 - al * 0.5 * Math.sin(a1));
     ctx1.lineTo(dx2 - al * Math.cos(a1 + Math.PI / 6), dy2 - al * Math.sin(a1 + Math.PI / 6));
     ctx1.closePath();
-    ctx1.fillStyle = '#ffe66d';
+    ctx1.fillStyle = styleConfig.getColor('time');
     ctx1.fill();
     
     const [dmx, dmy] = toZ((cx + dxe) / 2, cy, cx, cy, sc);
@@ -333,7 +333,7 @@ function drawCanvas1() {
         for (let i = 0; i < wp; i++) {
             const [vx1, vy1] = toZ(vsx, cury, cx, cy, sc);
             const [vx2, vy2] = toZ(vsx, cury + Math.sign(sl) * dx, cx, cy, sc);
-            ctx1.strokeStyle = '#ff9d76';
+            ctx1.strokeStyle = styleConfig.getColor('displacement');
             ctx1.lineWidth = 3;
             ctx1.beginPath();
             ctx1.moveTo(vx1, vy1);
@@ -348,11 +348,11 @@ function drawCanvas1() {
             ctx1.lineTo(vx2 - vl * 0.5 * Math.cos(va), vy2 - vl * 0.5 * Math.sin(va));
             ctx1.lineTo(vx2 - vl * Math.cos(va + Math.PI / 6), vy2 - vl * Math.sin(va + Math.PI / 6));
             ctx1.closePath();
-            ctx1.fillStyle = '#ff9d76';
+            ctx1.fillStyle = styleConfig.getColor('displacement');
             ctx1.fill();
             
             const [vmx, vmy] = toZ(vsx, cury + Math.sign(sl) * dx / 2, cx, cy, sc);
-            ctx1.fillStyle = '#ffe66d';
+            ctx1.fillStyle = styleConfig.getColor('time');
             ctx1.font = 'italic 14px Georgia';
             ctx1.fillText('dx', vmx + 30, vmy);
             cury += Math.sign(sl) * dx;
@@ -361,7 +361,7 @@ function drawCanvas1() {
         if (fp > 0.05) {
             const [vx1, vy1] = toZ(vsx, cury, cx, cy, sc);
             const [vx2, vy2] = toZ(vsx, cury + Math.sign(sl) * fp * dx, cx, cy, sc);
-            ctx1.strokeStyle = '#ff9d76';
+            ctx1.strokeStyle = styleConfig.getColor('displacement');
             ctx1.lineWidth = 3;
             ctx1.beginPath();
             ctx1.moveTo(vx1, vy1);
@@ -376,28 +376,28 @@ function drawCanvas1() {
             ctx1.lineTo(vx2 - vl * 0.5 * Math.cos(va), vy2 - vl * 0.5 * Math.sin(va));
             ctx1.lineTo(vx2 - vl * Math.cos(va + Math.PI / 6), vy2 - vl * Math.sin(va + Math.PI / 6));
             ctx1.closePath();
-            ctx1.fillStyle = '#ff9d76';
+            ctx1.fillStyle = styleConfig.getColor('displacement');
             ctx1.fill();
             
             const [vmx, vmy] = toZ(vsx, cury + Math.sign(sl) * fp * dx / 2, cx, cy, sc);
             ctx1.font = 'italic 12px Georgia';
-            ctx1.fillStyle = '#ff9d76';
+            ctx1.fillStyle = styleConfig.getColor('displacement');
             ctx1.fillText(fp.toFixed(2), vmx + 30, vmy);
-            ctx1.fillStyle = '#ffe66d';
+            ctx1.fillStyle = styleConfig.getColor('time');
             ctx1.fillText(' dx', vmx + 45, vmy);
         }
     }
     
-    ctx1.fillStyle = '#e94560';
+    ctx1.fillStyle = styleConfig.getColor('dot');
     ctx1.beginPath();
     ctx1.arc(zpx, zpy, 9, 0, 2 * Math.PI);
     ctx1.fill();
-    ctx1.strokeStyle = '#fff';
+    ctx1.strokeStyle = styleConfig.getColor('text');
     ctx1.lineWidth = 2;
     ctx1.stroke();
     
     ctx1.font = 'bold 14px Arial';
-    ctx1.fillStyle = '#ffe66d';
+    ctx1.fillStyle = styleConfig.getColor('time');
     ctx1.textAlign = 'center';
     ctx1.fillText('Zoomed View', zoomP.x + zoomW / 2, zoomP.y + 18);
     
@@ -445,7 +445,7 @@ function drawCanvas2() {
     }
     
     // Draw axes
-    ctx2.strokeStyle = '#4a5568';
+    ctx2.strokeStyle = styleConfig.getColor('border-color');
     ctx2.lineWidth = 2;
     const [x1, y1] = toC(zMin, 0);
     const [x2, y2] = toC(zMax, 0);
@@ -462,7 +462,7 @@ function drawCanvas2() {
     ctx2.stroke();
     
     // Draw grid
-    ctx2.strokeStyle = '#2d3748';
+    ctx2.strokeStyle = styleConfig.getColor('border-color');
     ctx2.lineWidth = 1;
     ctx2.setLineDash([2, 2]);
     for (let z = Math.ceil(zMin); z <= Math.floor(zMax); z++) {
@@ -476,7 +476,7 @@ function drawCanvas2() {
     ctx2.setLineDash([]);
     
     // Draw function
-    ctx2.strokeStyle = '#4ecca3';
+    ctx2.strokeStyle = styleConfig.getColor('accent');
     ctx2.lineWidth = 3;
     ctx2.beginPath();
     let start = false;
@@ -499,14 +499,14 @@ function drawCanvas2() {
     // Draw point
     const ps = g(px2);
     const [ppx, ppy] = toC(px2, ps);
-    ctx2.strokeStyle = '#ffe66d';
+    ctx2.strokeStyle = styleConfig.getColor('time');
     ctx2.lineWidth = 2;
     ctx2.strokeRect(ppx - 40, ppy - 40, 80, 80);
-    ctx2.fillStyle = '#e94560';
+    ctx2.fillStyle = styleConfig.getColor('dot');
     ctx2.beginPath();
     ctx2.arc(ppx, ppy, 10, 0, 2 * Math.PI);
     ctx2.fill();
-    ctx2.strokeStyle = '#fff';
+    ctx2.strokeStyle = styleConfig.getColor('text');
     ctx2.lineWidth = 2;
     ctx2.stroke();
     
@@ -514,73 +514,73 @@ function drawCanvas2() {
     ctx2.font = 'italic 16px Georgia';
     const txt = `(${px2.toFixed(2)}, ${ps.toFixed(2)})`;
     const tw = ctx2.measureText(txt).width;
-    ctx2.fillStyle = '#16213e';
+    ctx2.fillStyle = styleConfig.getColor('text-background');
     ctx2.fillRect(ppx + 17, ppy + 11, tw + 6, 20);
     let xo = ppx + 20;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText('(', xo, ppy + 25);
     xo += ctx2.measureText('(').width;
-    ctx2.fillStyle = '#e94560';
+    ctx2.fillStyle = styleConfig.getColor('dot');
     ctx2.fillText(px2.toFixed(2), xo, ppy + 25);
     xo += ctx2.measureText(px2.toFixed(2)).width;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText(', ', xo, ppy + 25);
     xo += ctx2.measureText(', ').width;
-    ctx2.fillStyle = '#4ecca3';
+    ctx2.fillStyle = styleConfig.getColor('accent');
     ctx2.fillText(ps.toFixed(2), xo, ppy + 25);
     xo += ctx2.measureText(ps.toFixed(2)).width;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText(')', xo, ppy + 25);
     
     // Draw legend
     const sl = gPrime(px2);
     ctx2.fillStyle = 'rgba(15,52,96,0.9)';
     ctx2.fillRect(legP.x, legP.y, 200, 85);
-    ctx2.strokeStyle = '#4a5568';
+    ctx2.strokeStyle = styleConfig.getColor('border-color');
     ctx2.lineWidth = 2;
     ctx2.strokeRect(legP.x, legP.y, 200, 85);
     ctx2.font = 'bold 12px Arial';
-    ctx2.fillStyle = '#ffe66d';
+    ctx2.fillStyle = styleConfig.getColor('time');
     ctx2.textAlign = 'left';
     ctx2.fillText('Legend', legP.x + 5, legP.y + 15);
     ctx2.font = 'italic 16px Georgia';
     let xp = legP.x + 12;
     let yp = legP.y + 35;
-    ctx2.fillStyle = '#4ecca3';
+    ctx2.fillStyle = styleConfig.getColor('accent');
     ctx2.fillText('s = g(z)', xp, yp);
     
     yp = legP.y + 55;
     xp = legP.x + 12;
-    ctx2.fillStyle = '#4ecca3';
+    ctx2.fillStyle = styleConfig.getColor('accent');
     ctx2.fillText('ds', xp, yp);
     xp += ctx2.measureText('ds').width;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText('/', xp, yp);
     xp += ctx2.measureText('/').width;
-    ctx2.fillStyle = '#ffe66d';
+    ctx2.fillStyle = styleConfig.getColor('time');
     ctx2.fillText('dz', xp, yp);
     xp += ctx2.measureText('dz').width;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText(' = ', xp, yp);
     xp += ctx2.measureText(' = ').width;
-    ctx2.fillStyle = '#ff9d76';
+    ctx2.fillStyle = styleConfig.getColor('displacement');
     ctx2.fillText(sl.toFixed(2), xp, yp);
     
     yp = legP.y + 73;
     xp = legP.x + 12;
-    ctx2.fillStyle = '#4ecca3';
+    ctx2.fillStyle = styleConfig.getColor('accent');
     ctx2.fillText('ds', xp, yp);
     xp += ctx2.measureText('ds').width;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText(' = ', xp, yp);
     xp += ctx2.measureText(' = ').width;
-    ctx2.fillStyle = '#ff9d76';
+    ctx2.fillStyle = styleConfig.getColor('displacement');
     ctx2.fillText(sl.toFixed(2), xp, yp);
     xp += ctx2.measureText(sl.toFixed(2)).width;
-    ctx2.fillStyle = '#eee';
+    ctx2.fillStyle = styleConfig.getColor('text');
     ctx2.fillText(' · ', xp, yp);
     xp += ctx2.measureText(' · ').width;
-    ctx2.fillStyle = '#ffe66d';
+    ctx2.fillStyle = styleConfig.getColor('time');
     ctx2.fillText('dz', xp, yp);
     
     // Draw zoom window
@@ -597,12 +597,12 @@ function drawCanvas2() {
     
     ctx2.fillStyle = 'rgba(22,33,62,0.95)';
     ctx2.fillRect(zoomP.x, zoomP.y, zoomW, zoomH);
-    ctx2.strokeStyle = '#ffe66d';
+    ctx2.strokeStyle = styleConfig.getColor('time');
     ctx2.lineWidth = 3;
     ctx2.strokeRect(zoomP.x, zoomP.y, zoomW, zoomH);
     
     // Function in zoom
-    ctx2.strokeStyle = '#4ecca3';
+    ctx2.strokeStyle = styleConfig.getColor('accent');
     ctx2.lineWidth = 3;
     ctx2.beginPath();
     start = false;
@@ -627,7 +627,7 @@ function drawCanvas2() {
     // Tangent
     const [tz1, ts1] = toZ(cz - md * 0.9, cs + sl * (cz - md * 0.9 - cz), cz, cs, sc);
     const [tz2, ts2] = toZ(cz + md * 0.9, cs + sl * (cz + md * 0.9 - cz), cz, cs, sc);
-    ctx2.strokeStyle = '#ff9d76';
+    ctx2.strokeStyle = styleConfig.getColor('displacement');
     ctx2.lineWidth = 3;
     ctx2.setLineDash([8, 4]);
     ctx2.beginPath();
@@ -640,7 +640,7 @@ function drawCanvas2() {
     const dze = cz + dz;
     const [dz1, ds1] = toZ(cz, cs, cz, cs, sc);
     const [dz2, ds2] = toZ(dze, cs, cz, cs, sc);
-    ctx2.strokeStyle = '#ffe66d';
+    ctx2.strokeStyle = styleConfig.getColor('time');
     ctx2.lineWidth = 4;
     ctx2.beginPath();
     ctx2.moveTo(dz1, ds1);
@@ -655,7 +655,7 @@ function drawCanvas2() {
     ctx2.lineTo(dz2 - al2 * 0.5 * Math.cos(a2), ds2 - al2 * 0.5 * Math.sin(a2));
     ctx2.lineTo(dz2 - al2 * Math.cos(a2 + Math.PI / 6), ds2 - al2 * Math.sin(a2 + Math.PI / 6));
     ctx2.closePath();
-    ctx2.fillStyle = '#ffe66d';
+    ctx2.fillStyle = styleConfig.getColor('time');
     ctx2.fill();
     
     const [dmx2, dmy2] = toZ((cz + dze) / 2, cs, cz, cs, sc);
@@ -673,7 +673,7 @@ function drawCanvas2() {
         for (let i = 0; i < wp; i++) {
             const [vz1, vs1] = toZ(vsx, curs, cz, cs, sc);
             const [vz2, vs2] = toZ(vsx, curs + Math.sign(sl) * dz, cz, cs, sc);
-            ctx2.strokeStyle = '#ff9d76';
+            ctx2.strokeStyle = styleConfig.getColor('displacement');
             ctx2.lineWidth = 3;
             ctx2.beginPath();
             ctx2.moveTo(vz1, vs1);
@@ -688,11 +688,11 @@ function drawCanvas2() {
             ctx2.lineTo(vz2 - vl * 0.5 * Math.cos(va), vs2 - vl * 0.5 * Math.sin(va));
             ctx2.lineTo(vz2 - vl * Math.cos(va + Math.PI / 6), vs2 - vl * Math.sin(va + Math.PI / 6));
             ctx2.closePath();
-            ctx2.fillStyle = '#ff9d76';
+            ctx2.fillStyle = styleConfig.getColor('displacement');
             ctx2.fill();
             
             const [vmx, vmy] = toZ(vsx, curs + Math.sign(sl) * dz / 2, cz, cs, sc);
-            ctx2.fillStyle = '#ffe66d';
+            ctx2.fillStyle = styleConfig.getColor('time');
             ctx2.font = 'italic 14px Georgia';
             ctx2.fillText('dz', vmx + 30, vmy);
             curs += Math.sign(sl) * dz;
@@ -701,7 +701,7 @@ function drawCanvas2() {
         if (fp > 0.05) {
             const [vz1, vs1] = toZ(vsx, curs, cz, cs, sc);
             const [vz2, vs2] = toZ(vsx, curs + Math.sign(sl) * fp * dz, cz, cs, sc);
-            ctx2.strokeStyle = '#ff9d76';
+            ctx2.strokeStyle = styleConfig.getColor('displacement');
             ctx2.lineWidth = 3;
             ctx2.beginPath();
             ctx2.moveTo(vz1, vs1);
@@ -716,28 +716,28 @@ function drawCanvas2() {
             ctx2.lineTo(vz2 - vl * 0.5 * Math.cos(va), vs2 - vl * 0.5 * Math.sin(va));
             ctx2.lineTo(vz2 - vl * Math.cos(va + Math.PI / 6), vs2 - vl * Math.sin(va + Math.PI / 6));
             ctx2.closePath();
-            ctx2.fillStyle = '#ff9d76';
+            ctx2.fillStyle = styleConfig.getColor('displacement');
             ctx2.fill();
             
             const [vmx, vmy] = toZ(vsx, curs + Math.sign(sl) * fp * dz / 2, cz, cs, sc);
             ctx2.font = 'italic 12px Georgia';
-            ctx2.fillStyle = '#ff9d76';
+            ctx2.fillStyle = styleConfig.getColor('displacement');
             ctx2.fillText(fp.toFixed(2), vmx + 30, vmy);
-            ctx2.fillStyle = '#ffe66d';
+            ctx2.fillStyle = styleConfig.getColor('time');
             ctx2.fillText(' dz', vmx + 45, vmy);
         }
     }
     
-    ctx2.fillStyle = '#e94560';
+    ctx2.fillStyle = styleConfig.getColor('dot');
     ctx2.beginPath();
     ctx2.arc(zpx, zpy, 9, 0, 2 * Math.PI);
     ctx2.fill();
-    ctx2.strokeStyle = '#fff';
+    ctx2.strokeStyle = styleConfig.getColor('text');
     ctx2.lineWidth = 2;
     ctx2.stroke();
     
     ctx2.font = 'bold 14px Arial';
-    ctx2.fillStyle = '#ffe66d';
+    ctx2.fillStyle = styleConfig.getColor('time');
     ctx2.textAlign = 'center';
     ctx2.fillText('Zoomed View', zoomP.x + zoomW / 2, zoomP.y + 18);
     
