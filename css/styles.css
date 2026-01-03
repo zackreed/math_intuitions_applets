@@ -154,13 +154,13 @@ h3 {
 }
 
 .option.correct {
-    background: var(--page-text-bg);
-    border-color: var(--page-accent);
+    background: #2d5016;
+    border-color: #4caf50;
 }
 
 .option.incorrect {
-    background: var(--page-text-bg);
-    border-color: var(--page-highlight);
+    background: #5d1616;
+    border-color: #f44336;
 }
 
 .option input[type="checkbox"],
@@ -203,11 +203,11 @@ h3 {
 }
 
 .check-btn:hover {
-    background: var(--page-accent);
+    background: #00b8d4;
 }
 
 .check-btn:disabled {
-    background: var(--page-border);
+    background: #0f3460;
     cursor: not-allowed;
     opacity: 0.5;
 }
