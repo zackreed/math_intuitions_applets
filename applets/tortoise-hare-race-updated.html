@@ -9,8 +9,8 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: var(--background);
-            color: var(--text);
+            background: #1a1a2e;
+            color: #eee;
             display: flex;
             gap: 20px;
             min-height: 100vh;
@@ -28,8 +28,8 @@
         }
         
         canvas {
-            border: 2px solid var(--border-color);
-            background: var(--text-background);
+            border: 2px solid #4a5568;
+            background: #16213e;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: block;
             cursor: crosshair;
@@ -37,12 +37,12 @@
         }
         
         canvas:hover {
-            border-color: var(--accent);
+            border-color: #4ecca3;
         }
         
         #controls {
             width: 300px;
-            background: var(--text-background);
+            background: #0f3460;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
@@ -53,13 +53,13 @@
         
         h2 {
             margin-top: 0;
-            color: var(--dot);
-            border-bottom: 2px solid var(--dot);
+            color: #e94560;
+            border-bottom: 2px solid #e94560;
             padding-bottom: 10px;
         }
         
         h3 {
-            color: var(--accent);
+            color: #4ecca3;
             font-size: 16px;
             margin-top: 20px;
         }
@@ -71,7 +71,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: var(--border-color);
+            color: #aaa;
             font-size: 14px;
         }
         
@@ -83,7 +83,7 @@
         button {
             width: 100%;
             padding: 12px;
-            background: var(--dot);
+            background: #e94560;
             color: white;
             border: none;
             border-radius: 4px;
@@ -95,26 +95,26 @@
         }
         
         button:hover {
-            background: var(--dot);
+            background: #c93952;
         }
         
         button.secondary {
-            background: var(--accent);
+            background: #4ecca3;
             padding: 8px 12px;
             font-size: 12px;
         }
         
         button.secondary:hover {
-            background: var(--accent);
+            background: #3db894;
         }
         
         .value-display {
-            color: var(--accent);
+            color: #4ecca3;
             font-weight: bold;
         }
         
         .result-box {
-            background: var(--text-background);
+            background: #16213e;
             padding: 15px;
             border-radius: 4px;
             margin-top: 10px;
@@ -124,23 +124,23 @@
         }
         
         .winner {
-            color: var(--accent);
+            color: #4ecca3;
             font-size: 24px;
             display: none;
         }
         
         .info-text {
-            background: var(--text-background);
+            background: #16213e;
             padding: 10px;
             border-radius: 4px;
             font-size: 12px;
-            color: var(--border-color);
+            color: #aaa;
             margin-top: 10px;
             line-height: 1.5;
         }
         
         .warning {
-            color: var(--time);
+            color: #ffe66d;
         }
     </style>
     <link rel="stylesheet" href="../css/color-schemes.css">
@@ -167,9 +167,9 @@
                 <div style="margin-bottom: 10px;">
                     <label style="display: inline; margin-right: 10px;">Δt =</label>
                     <input type="number" id="dt-input" step="0.5" min="0.5" max="5" value="0.5" 
-                           style="width: 80px; padding: 5px; background: var(--text-background); color: var(--accent); 
-                                  border: 1px solid var(--border-color); border-radius: 4px; font-weight: bold;">
-                    <span style="color: var(--border-color);">s</span>
+                           style="width: 80px; padding: 5px; background: #0f1925; color: #4ecca3; 
+                                  border: 1px solid #4a5568; border-radius: 4px; font-weight: bold;">
+                    <span style="color: #aaa;">s</span>
                 </div>
                 <div>Hare: ΔD/Δt = <span class="value-display" id="hare-rate">10.0</span> m/s</div>
                 <div>Tortoise: ΔD/Δt = <span class="value-display" id="tortoise-rate">--</span> m/s</div>
@@ -318,7 +318,7 @@
             }
             
             // Draw oval track
-            trackCtx.strokeStyle = styleConfig.getColor('border-color');
+            trackCtx.strokeStyle = '#4a5568';
             trackCtx.lineWidth = 3;
             trackCtx.beginPath();
             for (let t = 0; t <= 1; t += 0.01) {
@@ -333,7 +333,7 @@
             // Draw start line (at progress 0)
             const startPos = getOvalPosition(0);
             const [sx, sy] = toCanvas(startPos[0], startPos[1]);
-            trackCtx.strokeStyle = styleConfig.getColor('accent');
+            trackCtx.strokeStyle = '#4ecca3';
             trackCtx.lineWidth = 4;
             trackCtx.beginPath();
             trackCtx.moveTo(sx - 12, sy - 12);
@@ -341,7 +341,7 @@
             trackCtx.moveTo(sx - 12, sy + 12);
             trackCtx.lineTo(sx + 12, sy - 12);
             trackCtx.stroke();
-            trackCtx.fillStyle = styleConfig.getColor('accent');
+            trackCtx.fillStyle = '#4ecca3';
             trackCtx.font = 'bold 11px Arial';
             trackCtx.textAlign = 'center';
             trackCtx.fillText('START', sx, sy - 18);
@@ -349,7 +349,7 @@
             // Draw finish line (at progress 0.75)
             const finishPos = getOvalPosition(finishLine);
             const [fx, fy] = toCanvas(finishPos[0], finishPos[1]);
-            trackCtx.strokeStyle = styleConfig.getColor('time');
+            trackCtx.strokeStyle = '#ffe66d';
             trackCtx.lineWidth = 4;
             trackCtx.beginPath();
             trackCtx.moveTo(fx - 12, fy - 12);
@@ -357,11 +357,11 @@
             trackCtx.moveTo(fx - 12, fy + 12);
             trackCtx.lineTo(fx + 12, fy - 12);
             trackCtx.stroke();
-            trackCtx.fillStyle = styleConfig.getColor('time');
+            trackCtx.fillStyle = '#ffe66d';
             trackCtx.fillText('FINISH', fx, fy - 18);
             
             // Draw winner text in center of oval
-            trackCtx.fillStyle = styleConfig.getColor('text');
+            trackCtx.fillStyle = '#e8e8e8';
             trackCtx.font = 'bold 18px Arial';
             trackCtx.textAlign = 'center';
             trackCtx.textBaseline = 'middle';
@@ -374,11 +374,11 @@
             const hareProgress = hareStrategy(time);
             const harePos = getOvalPosition(hareProgress);
             const [hx, hy] = toCanvas(harePos[0], harePos[1]);
-            trackCtx.fillStyle = styleConfig.getColor('dot');
+            trackCtx.fillStyle = '#ff6b6b';
             trackCtx.beginPath();
             trackCtx.arc(hx, hy, 14, 0, 2 * Math.PI);
             trackCtx.fill();
-            trackCtx.fillStyle = styleConfig.getColor('text');
+            trackCtx.fillStyle = '#fff';
             trackCtx.font = 'bold 20px Arial';
             trackCtx.textAlign = 'center';
             trackCtx.textBaseline = 'middle';
@@ -388,11 +388,11 @@
             const tortoiseProgress = tortoiseStrategy(time);
             const tortoisePos = getOvalPosition(tortoiseProgress);
             const [tx, ty] = toCanvas(tortoisePos[0], tortoisePos[1]);
-            trackCtx.fillStyle = styleConfig.getColor('accent');
+            trackCtx.fillStyle = '#4ecdc4';
             trackCtx.beginPath();
             trackCtx.arc(tx, ty, 14, 0, 2 * Math.PI);
             trackCtx.fill();
-            trackCtx.fillStyle = styleConfig.getColor('text');
+            trackCtx.fillStyle = '#fff';
             trackCtx.fillText('🐢', tx, ty);
         }
         
@@ -401,7 +401,7 @@
             graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
             
             // Draw axes
-            graphCtx.strokeStyle = styleConfig.getColor('border-color');
+            graphCtx.strokeStyle = '#4a5568';
             graphCtx.lineWidth = 2;
             graphCtx.beginPath();
             graphCtx.moveTo(padding, padding);
@@ -410,7 +410,7 @@
             graphCtx.stroke();
             
             // Draw grid
-            graphCtx.strokeStyle = styleConfig.getColor('border-color');
+            graphCtx.strokeStyle = '#2d3748';
             graphCtx.lineWidth = 1;
             graphCtx.setLineDash([2, 2]);
             for (let i = 0; i <= 10; i++) {
@@ -428,7 +428,7 @@
             graphCtx.setLineDash([]);
             
             // Draw axis labels/markers
-            graphCtx.fillStyle = styleConfig.getColor('border-color');
+            graphCtx.fillStyle = '#aaa';
             graphCtx.font = '11px Arial';
             graphCtx.textAlign = 'center';
             
@@ -450,7 +450,7 @@
             
             // Draw finish line
             const [flx, fly] = toGraphCanvas(finishLine, finishLine);
-            graphCtx.strokeStyle = styleConfig.getColor('time');
+            graphCtx.strokeStyle = '#ffe66d';
             graphCtx.setLineDash([5, 5]);
             graphCtx.lineWidth = 2;
             graphCtx.beginPath();
@@ -460,7 +460,7 @@
             graphCtx.setLineDash([]);
             
             // Draw hare function
-            graphCtx.strokeStyle = styleConfig.getColor('dot');
+            graphCtx.strokeStyle = '#ff6b6b';
             graphCtx.lineWidth = 3;
             graphCtx.beginPath();
             for (let t = 0; t <= 1; t += 0.01) {
@@ -471,7 +471,7 @@
             graphCtx.stroke();
             
             // Draw tortoise function
-            graphCtx.strokeStyle = styleConfig.getColor('accent');
+            graphCtx.strokeStyle = '#4ecdc4';
             graphCtx.lineWidth = 3;
             graphCtx.beginPath();
             for (let t = 0; t <= 1; t += 0.005) {
@@ -490,15 +490,15 @@
                 );
                 
                 if (i === 0 || i === tortoiseControlPoints.length - 1) {
-                    graphCtx.fillStyle = styleConfig.getColor('border-color');
+                    graphCtx.fillStyle = '#6c757d';
                 } else {
-                    graphCtx.fillStyle = hoveredPoint === i ? styleConfig.getColor('time') : styleConfig.getColor('accent');
+                    graphCtx.fillStyle = hoveredPoint === i ? '#ffe66d' : '#4ecdc4';
                 }
                 
                 graphCtx.beginPath();
                 graphCtx.arc(cx, cy, 7, 0, 2 * Math.PI);
                 graphCtx.fill();
-                graphCtx.strokeStyle = styleConfig.getColor('text');
+                graphCtx.strokeStyle = '#fff';
                 graphCtx.lineWidth = 2;
                 graphCtx.stroke();
             }
@@ -508,13 +508,13 @@
             const tortoiseProgress = tortoiseStrategy(time);
             
             const [hgx, hgy] = toGraphCanvas(time, hareProgress);
-            graphCtx.fillStyle = styleConfig.getColor('dot');
+            graphCtx.fillStyle = '#ff6b6b';
             graphCtx.beginPath();
             graphCtx.arc(hgx, hgy, 8, 0, 2 * Math.PI);
             graphCtx.fill();
             
             const [tgx, tgy] = toGraphCanvas(time, tortoiseProgress);
-            graphCtx.fillStyle = styleConfig.getColor('accent');
+            graphCtx.fillStyle = '#4ecdc4';
             graphCtx.beginPath();
             graphCtx.arc(tgx, tgy, 8, 0, 2 * Math.PI);
             graphCtx.fill();
@@ -527,7 +527,7 @@
                 
                 // Hare dt arrows (horizontal Δt, then vertical Δy)
                 const [hfx, hfy] = toGraphCanvas(futureTime, hareProgress);
-                graphCtx.strokeStyle = styleConfig.getColor('dot');
+                graphCtx.strokeStyle = '#ff6b6b';
                 graphCtx.lineWidth = 2;
                 graphCtx.setLineDash([5, 3]);
                 graphCtx.beginPath();
@@ -544,7 +544,7 @@
                 
                 // Tortoise dt arrows (horizontal Δt, then vertical Δy)
                 const [tfx, tfy] = toGraphCanvas(futureTime, tortoiseProgress);
-                graphCtx.strokeStyle = styleConfig.getColor('accent');
+                graphCtx.strokeStyle = '#4ecdc4';
                 graphCtx.lineWidth = 2;
                 graphCtx.setLineDash([5, 3]);
                 graphCtx.beginPath();
@@ -561,7 +561,7 @@
             }
             
             // Labels
-            graphCtx.fillStyle = styleConfig.getColor('border-color');
+            graphCtx.fillStyle = '#aaa';
             graphCtx.font = '14px Arial';
             graphCtx.textAlign = 'center';
             graphCtx.fillText('Time (seconds)', graphCanvas.width / 2, graphCanvas.height - 20);

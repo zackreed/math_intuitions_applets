@@ -14,8 +14,8 @@
         }
         body {
             font-family: 'Arial', sans-serif;
-            background: var(--background);
-            color: var(--text);
+            background: #1a1a2e;
+            color: #eee;
             display: flex;
             gap: 20px;
             padding: 20px;
@@ -30,8 +30,8 @@
         }
         
         canvas {
-            border: 2px solid var(--border-color);
-            background: var(--text-background);
+            border: 2px solid #4a5568;
+            background: #16213e;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: block;
             max-width: 100%;
@@ -39,7 +39,7 @@
         
         #controls {
             width: 300px;
-            background: var(--text-background);
+            background: #0f3460;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
@@ -49,14 +49,14 @@
         
         h2 {
             margin-top: 0;
-            color: var(--dot);
-            border-bottom: 2px solid var(--dot);
+            color: #e94560;
+            border-bottom: 2px solid #e94560;
             padding-bottom: 10px;
             font-size: 20px;
         }
         
         h3 {
-            color: var(--accent);
+            color: #4ecca3;
             font-size: 14px;
             margin-top: 15px;
             margin-bottom: 8px;
@@ -69,24 +69,24 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: var(--border-color);
+            color: #aaa;
             font-size: 13px;
         }
         
         input[type="number"] {
             width: 100%;
             padding: 8px;
-            background: var(--text-background);
-            border: 1px solid var(--border-color);
+            background: #16213e;
+            border: 1px solid #4a5568;
             border-radius: 4px;
-            color: var(--text);
+            color: #e8e8e8;
             font-size: 14px;
         }
         
         button {
             width: 100%;
             padding: 10px;
-            background: var(--dot);
+            background: #e94560;
             color: white;
             border: none;
             border-radius: 4px;
@@ -98,27 +98,27 @@
         }
         
         button:hover {
-            background: var(--dot);
+            background: #c93952;
         }
         
         button.secondary {
-            background: var(--accent);
+            background: #4ecca3;
             padding: 8px;
             font-size: 12px;
         }
         
         button.secondary:hover {
-            background: var(--accent);
+            background: #3db894;
         }
         
         .value-display {
-            color: var(--accent);
+            color: #4ecca3;
             font-weight: bold;
             font-size: 16px;
         }
         
         .result-box {
-            background: var(--text-background);
+            background: #16213e;
             padding: 12px;
             border-radius: 4px;
             margin-top: 8px;
@@ -126,7 +126,7 @@
         }
         
         .info-box {
-            background: var(--text-background);
+            background: #16213e;
             padding: 10px;
             border-radius: 4px;
             font-size: 12px;
@@ -136,12 +136,12 @@
         
         .formula {
             font-family: 'Courier New', monospace;
-            background: var(--text-background);
+            background: #0f1925;
             padding: 8px;
             border-radius: 4px;
             margin: 5px 0;
             text-align: center;
-            color: var(--accent);
+            color: #4ecca3;
         }
     </style>
 </head>
@@ -163,7 +163,7 @@
             <h3>Denominator</h3>
             <label>Base = <span class="value-display" id="base-display">3</span></label>
             <input type="number" id="base-input" step="1" min="2" max="10" value="3">
-            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;">
+            <div style="font-size: 11px; color: #aaa; margin-top: 5px;">
                 New area added = πr²/base<sup>N</sup>
             </div>
         </div>
@@ -179,7 +179,7 @@
         <div class="result-box">
             <h3 style="margin-top: 0;">Partial Sum</h3>
             <div class="formula" id="sum-formula">Σ = 0</div>
-            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;">
+            <div style="font-size: 11px; color: #aaa; margin-top: 5px;">
                 Sum of all sector areas
             </div>
         </div>
@@ -187,7 +187,7 @@
         <div class="result-box">
             <h3 style="margin-top: 0;">Current Term</h3>
             <div class="formula" id="term-formula">a<sub>n</sub> = --</div>
-            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;">
+            <div style="font-size: 11px; color: #aaa; margin-top: 5px;">
                 Current sector area
             </div>
         </div>
@@ -214,7 +214,7 @@
         
         // Colors for different subdivision levels
         const colors = [
-            '#4ecca3', 'var(--dot)', 'var(--time)', '#00d2ff', 
+            '#4ecca3', '#ff6b6b', '#f9d423', '#00d2ff', 
             '#a8e6cf', '#ffd3b6', '#ffaaa5', '#ff8b94',
             '#c7ceea', '#b5ead7', '#e2f0cb', '#ffdac1',
             '#b4a7d6', '#ffa07a', '#98d8c8', '#f7dc6f'
@@ -253,7 +253,7 @@
             const centerY = canvas.height / 2;
             
             // Draw outer circle outline (always same size on screen)
-            ctx.strokeStyle = styleConfig.getColor('border-color');
+            ctx.strokeStyle = '#4a5568';
             ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.arc(centerX, centerY, displayRadius, 0, Math.PI * 2);
@@ -297,7 +297,7 @@
                     const labelX = centerX + labelRadius * Math.cos(midAngle);
                     const labelY = centerY + labelRadius * Math.sin(midAngle);
                     
-                    ctx.fillStyle = styleConfig.getColor('text');
+                    ctx.fillStyle = '#fff';
                     ctx.font = 'bold 14px Arial';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
@@ -318,14 +318,14 @@
             });
             
             // Draw center point
-            ctx.fillStyle = styleConfig.getColor('text');
+            ctx.fillStyle = '#fff';
             ctx.beginPath();
             ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
             ctx.fill();
             
             // Draw radius label
             if (n === 0) {
-                ctx.strokeStyle = styleConfig.getColor('border-color');
+                ctx.strokeStyle = '#aaa';
                 ctx.lineWidth = 1;
                 ctx.setLineDash([5, 5]);
                 ctx.beginPath();
@@ -334,7 +334,7 @@
                 ctx.stroke();
                 ctx.setLineDash([]);
                 
-                ctx.fillStyle = styleConfig.getColor('border-color');
+                ctx.fillStyle = '#aaa';
                 ctx.font = '14px Arial';
                 ctx.textAlign = 'center';
                 ctx.fillText(`r = ${r}`, centerX + displayRadius/2, centerY - 10);
@@ -440,9 +440,6 @@
     </script>
     <script src="../js/color-schemes.js"></script>
     <script src="../js/style-config.js"></script>
-    <script src="../js/global-scheme-config.js">
-        // Redraw when color scheme changes
-        window.addEventListener('colorSchemeChanged', draw);
-</script>
+    <script src="../js/global-scheme-config.js"></script>
 </body>
 </html>

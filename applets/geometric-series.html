@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
         canvas {
-            border: 2px solid var(--border-color, var(--border-color));
+            border: 2px solid var(--border-color, #4a5568);
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         #controls {
@@ -121,7 +121,7 @@
         <div class="result-box">
             <h3 style="margin-top: 0;">Partial Sum</h3>
             <div class="formula" id="sum-formula">Σ = 0.00</div>
-            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;">
+            <div style="font-size: 11px; color: #aaa; margin-top: 5px;">
                 Sum of filled areas = ab(1 - 1/2<sup>N</sup>)
             </div>
         </div>
@@ -129,7 +129,7 @@
         <div class="result-box">
             <h3 style="margin-top: 0;">Current Term</h3>
             <div class="formula" id="term-formula">a<sub>n</sub> = --</div>
-            <div style="font-size: 11px; color: var(--border-color); margin-top: 5px;">
+            <div style="font-size: 11px; color: #aaa; margin-top: 5px;">
                 Current subdivision: ab/2<sup>N</sup>
             </div>
         </div>
@@ -191,7 +191,7 @@ function draw(){
  const colors = getColors();
  const bgColor = styleConfig.getColor('background');
  const textColor = styleConfig.getColor('text');
- const borderColor = styleConfig.getCSSVariable('border-color') || 'var(--border-color)';
+ const borderColor = styleConfig.getCSSVariable('border-color') || '#4a5568';
  const highlightColor = styleConfig.getColor('time');
  
  ctx.fillStyle = bgColor;

@@ -29,14 +29,14 @@ if (document.readyState === 'loading') {
 }
 
 function applyGlobalScheme() {
-    //styleConfig.setScheme('default');                  // Classic 3Blue1Brown style
+    styleConfig.setScheme('default');                  // Classic 3Blue1Brown style
     //styleConfig.setScheme('dark_muted_pastels');       // Modern soft pastels (RECOMMENDED)
     // styleConfig.setScheme('deep_jewel_tones');         // Sophisticated elegance
     //styleConfig.setScheme('contrasting_vibrancy');     // High energy, bold
     // styleConfig.setScheme('erau');                     // ERAU university branding
     // styleConfig.setScheme('dark');                     // Contemporary dark theme
     // styleConfig.setScheme('high_contrast');            // Maximum accessibility
-    styleConfig.setScheme('warm_sunset');              // Cozy, inviting
+    //styleConfig.setScheme('warm_sunset');              // Cozy, inviting
     // styleConfig.setScheme('cool_ocean');               // Calm, professional
     // styleConfig.setScheme('forest_earth');             // Natural, grounded
 }

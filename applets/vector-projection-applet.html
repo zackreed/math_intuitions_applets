@@ -17,19 +17,19 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--background);
+            background: #1a1a2e;
             padding: 20px;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: var(--text-background);
+            background: #16213e;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             padding: 20px;
         }
         h1 {
-            color: var(--text);
+            color: #e8e8e8;
             margin-bottom: 20px;
         }
         .canvas-container {
@@ -38,8 +38,8 @@
             margin: 20px 0;
         }
         canvas {
-            border: 2px solid var(--border-color);
-            background: var(--text-background);
+            border: 2px solid #0f3460;
+            background: #0f1925;
             cursor: crosshair;
         }
         .legend-overlay {
@@ -52,12 +52,12 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
             font-size: 12px;
             max-width: 200px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #0f3460;
         }
         .legend-overlay h3 {
             margin: 0 0 8px 0;
             font-size: 14px;
-            color: var(--text);
+            color: #e8e8e8;
         }
         .stats-overlay {
             position: absolute;
@@ -68,15 +68,15 @@
             border-radius: 6px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
             font-size: 12px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #0f3460;
         }
         .stats-overlay .stat-item {
             margin: 5px 0;
-            color: var(--text);
+            color: #e8e8e8;
         }
         .stats-overlay .stat-label {
             font-weight: bold;
-            color: var(--highlight);
+            color: #00d9ff;
         }
         .vector-overlay {
             position: absolute;
@@ -87,13 +87,13 @@
             border-radius: 6px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
             font-size: 14px;
-            border: 1px solid var(--border-color);
-            color: var(--text);
+            border: 1px solid #0f3460;
+            color: #e8e8e8;
         }
         .controls {
             margin: 20px 0;
             padding: 15px;
-            background: var(--text-background);
+            background: #0f3460;
             border-radius: 5px;
             display: flex;
             align-items: center;
@@ -105,20 +105,20 @@
             min-width: 300px;
         }
         .input-section h3 {
-            color: var(--text);
+            color: #e8e8e8;
             margin-bottom: 8px;
             font-size: 14px;
         }
         textarea {
             width: 100%;
             padding: 8px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #0f3460;
             border-radius: 4px;
             font-family: monospace;
             font-size: 11px;
             resize: vertical;
-            background: var(--text-background);
-            color: var(--text);
+            background: #0f1925;
+            color: #e8e8e8;
             min-height: 60px;
         }
         .button-group {
@@ -129,8 +129,8 @@
         button {
             padding: 8px 16px;
             margin: 0;
-            background: var(--text-background);
-            color: var(--text);
+            background: #0f3460;
+            color: #e8e8e8;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -140,11 +140,11 @@
             transition: background 0.3s;
         }
         button:hover {
-            background: var(--highlight);
+            background: #00b8d4;
         }
         button.active {
-            background: var(--highlight);
-            color: var(--text-background);
+            background: #00d9ff;
+            color: #0f1925;
         }
         .stats {
             display: none;
@@ -159,13 +159,13 @@
             display: flex;
             align-items: center;
             margin: 5px 0;
-            color: var(--text);
+            color: #e8e8e8;
         }
         .color-box {
             width: 30px;
             height: 20px;
             margin-right: 10px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #0f3460;
         }
     </style>
 </head>
@@ -207,19 +207,19 @@
             <div class="legend-overlay">
                 <h3>Legend</h3>
                 <div class="legend-item" id="legend-circle">
-                    <div class="color-box" style="background: var(--highlight);"></div>
+                    <div class="color-box" style="background: #0d92f4;"></div>
                     <span>Vector \(\vec{v}\)</span>
                 </div>
                 <div class="legend-item" id="legend-proj1">
-                    <div class="color-box" style="background: var(--accent);"></div>
+                    <div class="color-box" style="background: #77e4c8;"></div>
                     <span>Projections</span>
                 </div>
                 <div class="legend-item" id="legend-dist">
-                    <div class="color-box" style="background: var(--dot);"></div>
+                    <div class="color-box" style="background: #ff6b9d;"></div>
                     <span>Distances</span>
                 </div>
                 <div class="legend-item" id="legend-points">
-                    <div class="color-box" style="background: var(--dot);"></div>
+                    <div class="color-box" style="background: #c44569;"></div>
                     <span>Data Points</span>
                 </div>
             </div>
