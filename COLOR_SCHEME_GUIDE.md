@@ -1,183 +1,252 @@
-# Color Scheme Configuration Guide
+# Color Scheme System - Developer Guide
 
-## Overview
+## 🎨 Overview
 
-This project now supports multiple color schemes that can be applied globally across all pages and walkthroughs. The color schemes are defined in the `New Styles` folder and integrated into the framework through CSS custom properties (CSS variables).
+This repository uses a unified color scheme system that allows you to **set colors once in code** and have them apply across all applets and pages. This is a **developer tool only** - users don't see any color scheme options.
 
-## Quick Start: Changing the Global Color Scheme
+## ✅ What's Been Done
 
-To change the color scheme for the entire site:
+All applets and pages have been migrated to use the color scheme system. The infrastructure is in place and working.
 
-1. Open the file: `js/global-style-config.js`
-2. Find the line that says:
-   ```javascript
-   const GLOBAL_COLOR_SCHEME = 'dark_muted_pastels';
-   ```
-3. Change `'dark_muted_pastels'` to any of the available color schemes (see list below)
-4. Save the file
-5. Refresh any open pages in your browser
+## 🚀 How to Use
 
-That's it! All pages and walkthroughs will automatically use the new color scheme.
+### Quick Start: Change the Global Color Scheme
 
-## Available Color Schemes
-
-Choose from these 10 carefully crafted color schemes:
-
-1. **`default`** - Classic black background with vibrant colors
-   - Best for: Traditional educational math videos
-   - Style: High contrast, clear visibility
-
-2. **`dark_muted_pastels`** - Soft pastels on dark gray background *(Current default)*
-   - Best for: Gentle, modern aesthetic
-   - Style: Low contrast, easy on eyes
-
-3. **`deep_jewel_tones`** - Rich, saturated colors on very dark background
-   - Best for: Professional, sophisticated look
-   - Style: Medium contrast, elegant
-
-4. **`contrasting_vibrancy`** - Bright, bold colors with maximum energy
-   - Best for: Attention-grabbing content
-   - Style: Very high contrast, energetic
-
-5. **`erau`** - ERAU university branding colors
-   - Best for: ERAU-specific content
-   - Style: University brand compliance
-
-6. **`dark`** - Modern sophisticated dark theme
-   - Best for: Contemporary presentations
-   - Style: Balanced contrast
-
-7. **`high_contrast`** - Maximum contrast for accessibility
-   - Best for: Visibility in all conditions
-   - Style: Stark, clear
-
-8. **`warm_sunset`** - Warm oranges and browns
-   - Best for: Organic, warm feeling
-   - Style: Cozy, inviting
-
-9. **`cool_ocean`** - Blues and cyans for oceanic feel
-   - Best for: Calm, flowing content
-   - Style: Cool, tranquil
-
-10. **`forest_earth`** - Greens and earth tones
-    - Best for: Natural, grounded aesthetic
-    - Style: Organic, stable
-
-## How It Works
-
-### Architecture
-
-The color scheme system is built on three components:
-
-1. **`New Styles/color_schemes.css`** - Contains CSS custom properties for all color schemes
-2. **`js/color-schemes.js`** - JavaScript constants for accessing colors programmatically
-3. **`js/global-style-config.js`** - Global configuration that applies the selected scheme
-
-### Color Variables
-
-Each color scheme provides these semantic color variables:
-
-- `--background` - Main background color
-- `--text` - Primary text color
-- `--text-background` - Background for text elements
-- `--text-surrounding` - Text borders/surroundings
-- `--highlight` - Emphasis color
-- `--accent` - Secondary accent
-- `--time` - Time-related elements
-- `--displacement` - Position/movement
-- `--dot` - Points and markers
-- `--contrast-1` - First contrasting color
-- `--contrast-2` - Second contrasting color
-
-### CSS Usage
-
-All styles in `css/styles.css` now use these CSS variables instead of hardcoded colors:
-
-```css
-body {
-    background: var(--background);
-    color: var(--text);
-}
-
-h1 {
-    color: var(--highlight);
-}
-
-.section {
-    background: var(--text-background);
-    border-bottom: 2px solid var(--text-surrounding);
-}
-```
-
-This means when you change the `GLOBAL_COLOR_SCHEME`, all these elements automatically adapt to the new colors.
-
-### JavaScript Usage
-
-If you need to access colors in JavaScript (for canvas drawing, etc.):
+**Edit `/js/global-scheme-config.js`** and uncomment your preferred scheme inside the `applyGlobalScheme()` function:
 
 ```javascript
-// Get a color from the active scheme
-const highlightColor = getSchemeColor('highlight');
-
-// Get the active scheme name
-const currentScheme = getActiveColorScheme();
-
-// Access the COLOR_SCHEMES object directly
-const allSchemes = COLOR_SCHEMES;
-const specificScheme = COLOR_SCHEMES['dark_muted_pastels'];
+function applyGlobalScheme() {
+    // Uncomment ONE line:
+    
+    // styleConfig.setScheme('default');                  // Classic 3Blue1Brown style
+    styleConfig.setScheme('dark_muted_pastels');       // Modern soft pastels (ACTIVE)
+    // styleConfig.setScheme('deep_jewel_tones');         // Sophisticated elegance
+    // styleConfig.setScheme('contrasting_vibrancy');     // High energy, bold
+    // styleConfig.setScheme('erau');                     // ERAU university branding
+    // styleConfig.setScheme('dark');                     // Contemporary dark theme
+    // styleConfig.setScheme('high_contrast');            // Maximum accessibility
+    // styleConfig.setScheme('warm_sunset');              // Cozy, inviting
+    // styleConfig.setScheme('cool_ocean');               // Calm, professional
+    // styleConfig.setScheme('forest_earth');             // Natural, grounded
+}
 ```
 
-## Testing Different Schemes
+That's it! Refresh your browser (Ctrl+F5 or Cmd+Shift+R) and all pages and applets will use that scheme.
 
-To preview different schemes quickly:
+### Override for a Specific Page
 
-1. Keep a browser window open with your page
-2. Edit `js/global-style-config.js` and change the `GLOBAL_COLOR_SCHEME` value
-3. Save the file
-4. Refresh the browser
-5. Repeat to try different schemes
+In that page's HTML, add after the global-scheme-config.js script:
 
-## What's Covered
+```html
+<script src="../js/global-scheme-config.js"></script>
+<script>
+    // Override just for this page
+    styleConfig.setScheme('erau');
+</script>
+```
 
-The global color scheme currently applies to:
+### Override for a Specific Applet
 
-- ✅ Main index page (`index.html`)
-- ✅ All walkthrough pages in the `pages/` folder
-- ✅ Quiz components and feedback
-- ✅ Sections, headers, and text
-- ✅ Buttons, inputs, and controls
-- ✅ Code blocks and hints
-- ⚠️ **Applets are NOT affected** (as requested - applets maintain their own styling)
+Same approach - add a script tag with `styleConfig.setScheme('scheme_name');`
 
-## Future Enhancements
+## 📋 Available Color Schemes
 
-Potential improvements for later:
+1. **default** - Classic black background with vibrant colors (3Blue1Brown style)
+2. **dark_muted_pastels** ⭐ - Soft pastels on dark gray (recommended default)
+3. **deep_jewel_tones** - Rich, saturated jewel colors
+4. **contrasting_vibrancy** - Bright, bold, maximum energy
+5. **erau** - ERAU university branding colors
+6. **dark** - Modern sophisticated dark theme
+7. **high_contrast** - Maximum contrast for accessibility
+8. **warm_sunset** - Warm oranges and browns
+9. **cool_ocean** - Blues and cyans
+10. **forest_earth** - Greens and earth tones
 
-- Add a UI toggle to switch schemes without editing code
-- Create custom schemes for specific topics
-- Apply schemes to applets (when desired)
-- Add animation timing function support (already available in New Styles)
+Each scheme provides these semantic colors:
+- `background`, `text`, `text_background`, `text_surrounding`
+- `highlight`, `accent`, `time`, `displacement`, `dot`
+- `contrast_1`, `contrast_2`
 
-## Troubleshooting
+## 🎯 Common Tasks
 
-**Problem: Colors don't change after updating the config**
-- Solution: Make sure you saved `js/global-style-config.js` and did a hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+### Change Theme for Everything
+1. Edit `/js/global-scheme-config.js`
+2. Uncomment your preferred scheme
+3. Done!
 
-**Problem: Some elements still show old colors**
-- Solution: Check if those elements are in an applet (which maintains separate styling) or if they use inline styles
+### Use Different Schemes for Different Sections
+Edit `/js/global-scheme-config.js` and uncomment the advanced section:
 
-**Problem: JavaScript errors in console**
-- Solution: Ensure `js/color-schemes.js` is loaded before `js/global-style-config.js` in your HTML
+```javascript
+(function() {
+    const path = window.location.pathname;
+    
+    if (path.includes('/applets/')) {
+        styleConfig.setScheme('dark_muted_pastels');
+    } else if (path.includes('/pages/')) {
+        styleConfig.setScheme('default');
+    } else if (path.includes('index.html')) {
+        styleConfig.setScheme('cool_ocean');
+    }
+})();
+```
 
-## Additional Resources
+### Get Colors in JavaScript (for Canvas Drawing)
 
-For more information about the color schemes and their design:
+In your applet code:
 
-- See `New Styles/UNIFIED_STYLE_README.md` - Complete style library documentation
-- See `New Styles/STYLE_GUIDE.md` - Detailed color scheme descriptions
-- See `New Styles/QUICK_START.md` - Quick reference for the style system
+```javascript
+function draw() {
+    // Get colors from current scheme
+    const bgColor = styleConfig.getColor('background');
+    const highlightColor = styleConfig.getColor('highlight');
+    const textColor = styleConfig.getColor('text');
+    
+    // Use them
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = highlightColor;
+    // ... etc
+}
+
+// Redraw when scheme changes
+window.addEventListener('colorSchemeChanged', () => {
+    draw();
+});
+```
+
+### Use Colors in CSS (Automatic)
+
+CSS variables are automatically set based on the active scheme:
+
+```css
+.my-element {
+    background: var(--background);
+    color: var(--text);
+    border-color: var(--highlight);
+}
+```
+
+Most of your CSS will already work because the shared stylesheets use these variables.
+
+## 📂 Files You Might Edit
+
+- **`/js/global-scheme-config.js`** - Set the default scheme here (most common)
+- **Individual page/applet HTML** - Override scheme for specific pages
+- **`/js/style-config.js`** - Core system (rarely need to edit)
+- **`/css/color-schemes.css`** - CSS variables for all schemes (rarely need to edit)
+
+## 🔧 Technical Details
+
+### How It Works
+
+1. `color-schemes.css` defines CSS custom properties for each scheme
+2. `color-schemes.js` provides the color data in JavaScript
+3. `style-config.js` is the API that sets the `data-color-scheme` attribute on `<html>`
+4. `global-scheme-config.js` calls `styleConfig.setScheme()` to set the default
+5. CSS automatically picks up colors via `var(--color-name)`
+6. JavaScript can get colors via `styleConfig.getColor('color-name')`
+
+### API Reference
+
+```javascript
+// Set global scheme
+styleConfig.setScheme('dark_muted_pastels');
+
+// Get a color
+const color = styleConfig.getColor('highlight');  // Returns hex string like '#ABDADC'
+
+// Get all colors
+const colors = styleConfig.getColors();  // Returns object with all colors
+
+// Get current scheme name
+const current = styleConfig.getCurrentScheme();  // e.g., 'dark_muted_pastels'
+
+// Get available schemes
+const schemes = styleConfig.getAvailableSchemes();  // Array of scheme names
+
+// Color conversion helpers
+const rgb = styleConfig.hexToRGB('#FF6B6B');  // [255, 107, 107]
+const normalized = styleConfig.hexToRGBNormalized('#FF6B6B');  // [1.0, 0.42, 0.42]
+```
+
+## 📝 Example: Creating a New Applet
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My New Applet</title>
+    <link rel="stylesheet" href="../css/color-schemes.css">
+    <link rel="stylesheet" href="../css/applet-styles.css">
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    
+    <script src="../js/color-schemes.js"></script>
+    <script src="../js/style-config.js"></script>
+    <script src="../js/global-scheme-config.js"></script>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function draw() {
+            // Use color scheme
+            ctx.fillStyle = styleConfig.getColor('background');
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.strokeStyle = styleConfig.getColor('highlight');
+            ctx.fillStyle = styleConfig.getColor('text');
+            // ... your drawing code
+        }
+        
+        // Redraw on scheme change
+        window.addEventListener('colorSchemeChanged', draw);
+        
+        draw();
+    </script>
+</body>
+</html>
+```
+
+## 🎨 Customizing Colors
+
+### Adding a New Scheme
+
+1. Edit `/js/color-schemes.js` and add your scheme to the `COLOR_SCHEMES` object
+2. Edit `/css/color-schemes.css` and add a new `[data-color-scheme='your_scheme']` section
+3. Use it: `styleConfig.setScheme('your_scheme');`
+
+### Tweaking an Existing Scheme
+
+Edit the color values in `/js/color-schemes.js` and `/css/color-schemes.css`
+
+## 💡 Tips
+
+- **Start simple**: Just edit `global-scheme-config.js` to change the scheme
+- **Test different schemes**: Try them all to see what looks best
+- **Use semantic names**: Instead of hardcoding `'#FF0000'`, use `styleConfig.getColor('highlight')`
+- **Canvas redraws**: Remember to add the `colorSchemeChanged` event listener
+- **Check examples**: See `applets/geometric-series.html` for a complete working example
+
+## 🐛 Troubleshooting
+
+**Colors not showing?**
+- Check that all three scripts are included (color-schemes.js, style-config.js, global-scheme-config.js)
+- Make sure they're in the correct order
+- Check browser console for errors
+
+**Scheme not changing?**
+- Make sure you uncommented only ONE scheme in global-scheme-config.js
+- Hard refresh the page (Ctrl+F5 or Cmd+Shift+R)
+- Check that the scheme name is spelled correctly
+
+**Canvas not updating?**
+- Did you add the `colorSchemeChanged` event listener?
+- Is your draw function using `styleConfig.getColor()` instead of hardcoded colors?
 
 ---
 
-**Last Updated:** January 2026  
-**Author:** Zackery Reed
+**That's it!** Edit one line in `global-scheme-config.js` to change your entire site's color scheme.

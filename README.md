@@ -10,7 +10,7 @@ The repository features a **unified color scheme system** for consistent styling
 - **No user-facing controls** - users see your chosen theme
 - **Easy to change** - edit one line to switch the entire site's colors
 
-**To change the color scheme:** Edit `js/global-style-config.js` and change the `GLOBAL_COLOR_SCHEME` constant.
+**To change the color scheme:** Edit `/js/global-scheme-config.js` and uncomment your preferred scheme.
 
 **Documentation:** See `COLOR_SCHEME_GUIDE.md` for complete instructions.
 
@@ -25,7 +25,8 @@ The repository features a **unified color scheme system** for consistent styling
   - `styles.css` — Page styles
 - `js/` — Shared JavaScript utilities
   - `color-schemes.js` — Color scheme data
-  - `global-style-config.js` — Default scheme configuration ⚙️
+  - `style-config.js` — Color management API
+  - `global-scheme-config.js` — Default scheme configuration ⚙️
   - `canvas-utils.js`, `quiz.js`, `utils.js` — Utilities
 - `New Styles/` — Original Python source for color schemes
 
